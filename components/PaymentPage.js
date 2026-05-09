@@ -155,7 +155,6 @@ const PaymentPage = ({ username }) => {
           <div className='flex gap-5 mt-5'>
             <button className="mt-2.5 bg-white/4 border border-white/9 text-[#a0a0b8] hover:bg-white/8 hover:border-[#a78bfa]/25 hover:text-[#d0d0f0] text-sm px-6 py-2.5 rounded-xl transition-all duration-200" onClick={() => pay(1000)}>Pay ₹10</button>
             <button className="mt-2.5 bg-white/4 border border-white/9 text-[#a0a0b8] hover:bg-white/8 hover:border-[#a78bfa]/25 hover:text-[#d0d0f0] text-sm px-6 py-2.5 rounded-xl transition-all duration-200" onClick={() => pay(3000)}>Pay ₹30</button>
-            <button className="mt-2.5 bg-white/4 border border-white/9 text-[#a0a0b8] hover:bg-white/8 hover:border-[#a78bfa]/25 hover:text-[#d0d0f0] text-sm px-6 py-2.5 rounded-xl transition-all duration-200" onClick={() => pay(5000)}>Pay ₹50</button>
           </div>
         </div>
 

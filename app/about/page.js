@@ -109,8 +109,8 @@ const AboutPage = () => {
 
         <div className="grid grid-cols-3 gap-4">
           {[
-            { num: '01', title: 'Create your page', desc: 'Sign up with Google or GitHub, add your name, bio, and profile picture. Your page is live instantly.' },
-            { num: '02', title: 'Share the link', desc: 'Drop your link in your YouTube description, Twitter bio, or Instagram. Wherever your audience is.' },
+            { num: '01', title: 'First Log In', desc: 'Sign up with Google or GitHub, add your name, bio, email id or thorugh your github.You are good to go.' },
+            { num: '02', title: 'Create A Profile', desc: 'Create your profile by adding your coverpic,name,email etc into the dashboard.'},
             { num: '03', title: 'Receive support', desc: 'Supporters visit your page, leave a message and pay any amount. Funds arrive in your account.' },
           ].map((step, i) => (
             <div key={i} className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 transition-all duration-250">
