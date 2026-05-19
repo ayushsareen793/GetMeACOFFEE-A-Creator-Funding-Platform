@@ -114,7 +114,7 @@ const PaymentPage = ({ username }) => {
         {/* supporter list */}
         <div className="bg-[#111118] border border-white/6 rounded-[20px] p-6 w-1/2">
           <h2 className="text-[17px] font-bold text-[#e0e0f0] text-center mb-5 flex items-center justify-center gap-2">
-            <span className="w-7 h-7 bg-[#6c63ff]/10 border border-[#6c63ff]/20 rounded-lg flex items-center justify-center text-[12px]">★</span>
+            {/* <span className="w-7 h-7 bg-[#6c63ff]/10 border border-[#6c63ff]/20 rounded-lg flex items-center justify-center text-[12px]"></span> */}
             Top 10 Supporters
           </h2>
           <ul className="space-y-0">
@@ -139,7 +139,7 @@ const PaymentPage = ({ username }) => {
         {/* Make a Payment */}
         <div className="bg-[#111118] border border-white/6 rounded-[20px] p-6 w-1/2">
           <h2 className="text-[17px] font-bold text-[#e0e0f0] text-center mb-5 flex items-center justify-center gap-2">
-            <span className="w-7 h-7 bg-[#6c63ff]/10 border border-[#6c63ff]/20 rounded-lg flex items-center justify-center text-[12px]">♥</span>
+            {/* <span className="w-7 h-7 bg-[#6c63ff]/10 border border-[#6c63ff]/20 rounded-lg flex items-center justify-center text-[12px]"></span> */}
             Make a Payment
           </h2>
 

@@ -4,7 +4,17 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const AboutPage = () => {
-    const router=useRouter()
+  const router = useRouter()
+  const { data: session } = useSession()
+
+  const handlebutton = () => {
+    if (!session) {
+      router.push("/Login")
+    }
+    else {
+      router.push("/dashboard")
+    }
+  }
 
   return (
     <div className="bg-[#0c0c0e] min-h-screen text-white">
@@ -29,7 +39,7 @@ const AboutPage = () => {
           GetMeACoffee is a simple, beautiful platform where fans support the creators they love. No subscriptions. No complexity. Just genuine appreciation.
         </p>
 
-        
+
       </div>
 
       {/* Divider */}
@@ -57,7 +67,7 @@ const AboutPage = () => {
 
           <div className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 rounded-[18px] p-7 transition-all duration-250">
             <div className="w-14 h-14 bg-[#6c63ff]/10 border border-[#6c63ff]/20 rounded-2xl flex items-center justify-center mb-5">
-              <span className="text-2xl">🚀</span>
+              <span className="text-2xl"><img src="https://img.icons8.com/?size=160&id=58915&format=png" alt="" /></span>
             </div>
             <h3 className="font-bold text-[15px] text-[#e0e0f0] mb-2">Zero friction support</h3>
             <p className="text-[13px] text-[#555] leading-relaxed">
@@ -79,16 +89,16 @@ const AboutPage = () => {
 
         <div className="grid grid-cols-3 gap-4">
           {[
-            { icon: '💜', title: 'Razorpay Payments', desc: 'Secure, fast payments in INR. Supporters pay any custom amount with ease.' },
-            { icon: '✨', title: 'Beautiful Pages', desc: 'Customise your profile, cover photo, and bio. Your page, your vibe.' },
-            { icon: '📊', title: 'Live Dashboard', desc: 'Track every payment, message, and supporter in one clean dashboard.' },
-            { icon: '🔒', title: 'Secure & Private', desc: 'OAuth login, encrypted sessions — your data is always safe with us.' },
-            { icon: '⚡', title: 'Instant Setup', desc: 'Sign up, personalise, and share your page in under two minutes.' },
-            { icon: '🎯', title: 'No Platform Cut', desc: 'Every rupee your supporter sends goes straight to you. Always.' },
+            { icon: 'https://img.icons8.com/?size=160&id=dhtaSUStrLtV&format=png', title: 'Razorpay Payments', desc: 'Secure, fast payments in INR. Supporters pay any custom amount with ease.' },
+            { icon: 'https://img.icons8.com/color/48/paint-palette.png', title: 'Beautiful Pages', desc: 'Customise your profile, cover photo, and bio. Your page, your vibe.' },
+            { icon: 'https://img.icons8.com/color/48/combo-chart.png', title: 'Dashboard', desc: 'Create profile,add cover pic and supporter in one clean dashboard.' },
+            { icon: 'https://img.icons8.com/color/48/lock-2.png', title: 'Secure & Private', desc: 'OAuth login, encrypted sessions — your data is always safe with us.' },
+            { icon: 'https://img.icons8.com/color/48/lightning-bolt.png', title: 'Instant Setup', desc: 'Sign up, personalise,using your github account.'},
+            { icon: 'https://img.icons8.com/color/48/nothing-found.png', title: 'No Platform Cut', desc: 'Every rupee your supporter sends goes straight to you. Always.' },
           ].map((item, i) => (
             <div key={i} className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 text-center transition-all duration-250">
               <div className="w-14 h-14 bg-[#6c63ff]/10 border border-[#6c63ff]/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
-                <span className="text-2xl">{item.icon}</span>
+                <img src={item.icon} alt={item.title} className="w-7 h-7 object-contain" />
               </div>
               <h3 className="font-bold text-[15px] text-[#e0e0f0] mb-2">{item.title}</h3>
               <p className="text-[13px] text-[#555] leading-relaxed">{item.desc}</p>
@@ -110,7 +120,7 @@ const AboutPage = () => {
         <div className="grid grid-cols-3 gap-4">
           {[
             { num: '01', title: 'First Log In', desc: 'Sign up with Google or GitHub, add your name, bio, email id or thorugh your github.You are good to go.' },
-            { num: '02', title: 'Create A Profile', desc: 'Create your profile by adding your coverpic,name,email etc into the dashboard.'},
+            { num: '02', title: 'Create A Profile', desc: 'Create your profile by adding your coverpic,name,email etc into the dashboard.' },
             { num: '03', title: 'Receive support', desc: 'Supporters visit your page, leave a message and pay any amount. Funds arrive in your account.' },
           ].map((step, i) => (
             <div key={i} className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 transition-all duration-250">
@@ -169,8 +179,8 @@ const AboutPage = () => {
         <p className="text-[#555] text-[15px] leading-relaxed max-w-md mb-8">
           Join GetMeACoffee and start getting recognition and support.
         </p>
-        <button onClick={()=>{router.push("/dashboard")}} className="bg-linear-to-br from-[#6c63ff] to-[#a78bfa] text-white font-semibold text-sm px-7 py-3 rounded-xl transition-all duration-200 hover:opacity-85 hover:-translate-y-px">
-          ☕ Create your page — it&apos;s free
+        <button onClick={handlebutton} className="bg-linear-to-br from-[#6c63ff] to-[#a78bfa] text-white font-semibold text-sm px-7 py-3 rounded-xl transition-all duration-200 hover:opacity-85 hover:-translate-y-px">
+          Create your page — it&apos;s free
         </button>
       </div>
 
