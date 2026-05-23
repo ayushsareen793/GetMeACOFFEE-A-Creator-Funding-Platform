@@ -27,7 +27,7 @@ export const authoptions = NextAuth({
 //    kuch mat karo    →   naya user banao
 //                         (email + username save karo)
 //          ↓
-// 4. return true → login allow karo ✅
+// 4. return true → login allow karo 
 
 
   callbacks: {
