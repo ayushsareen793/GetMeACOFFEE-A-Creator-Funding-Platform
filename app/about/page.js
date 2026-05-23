@@ -93,7 +93,7 @@ const AboutPage = () => {
             { icon: 'https://img.icons8.com/color/48/paint-palette.png', title: 'Beautiful Pages', desc: 'Customise your profile, cover photo, and bio. Your page, your vibe.' },
             { icon: 'https://img.icons8.com/color/48/combo-chart.png', title: 'Dashboard', desc: 'Create profile,add cover pic and supporter in one clean dashboard.' },
             { icon: 'https://img.icons8.com/color/48/lock-2.png', title: 'Secure & Private', desc: 'OAuth login, encrypted sessions — your data is always safe with us.' },
-            { icon: 'https://img.icons8.com/color/48/lightning-bolt.png', title: 'Instant Setup', desc: 'Sign up, personalise,using your github account.'},
+            { icon: 'https://img.icons8.com/color/48/lightning-bolt.png', title: 'Instant Setup', desc: 'Sign up, personalise,using your github account.' },
             { icon: 'https://img.icons8.com/color/48/nothing-found.png', title: 'No Platform Cut', desc: 'Every rupee your supporter sends goes straight to you. Always.' },
           ].map((item, i) => (
             <div key={i} className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 text-center transition-all duration-250">
@@ -117,19 +117,35 @@ const AboutPage = () => {
           Three steps to start <span className="text-[#444]">earning support</span>
         </h2>
 
-        <div className="grid grid-cols-3 gap-4">
-          {[
-            { num: '01', title: 'First Log In', desc: 'Sign up with Google or GitHub, add your name, bio, email id or thorugh your github.You are good to go.' },
-            { num: '02', title: 'Create A Profile', desc: 'Create your profile by adding your coverpic,name,email etc into the dashboard.' },
-            { num: '03', title: 'Receive support', desc: 'Supporters visit your page, leave a message and pay any amount. Funds arrive in your account.' },
-          ].map((step, i) => (
-            <div key={i} className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 transition-all duration-250">
-              <div className="text-[#6c63ff]/40 font-extrabold text-[28px] tracking-tight mb-4">{step.num}</div>
-              <h3 className="font-bold text-[15px] text-[#e0e0f0] mb-2">{step.title}</h3>
-              <p className="text-[13px] text-[#555] leading-relaxed">{step.desc}</p>
+        {/* How it works */}
+        <div className="max-w-4xl mx-auto px-8 py-16">
+          <p className="text-center text-[11px] font-bold uppercase tracking-[2px] text-[#6c63ff] mb-3">How it works</p>
+          <h2 className="text-center text-[30px] font-extrabold tracking-tight text-[#f0f0f8] mb-12">
+            Three steps to start <span className="text-[#444]">earning support</span>
+          </h2>
+
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 transition-all duration-250">
+              <div className="text-[#6c63ff]/40 font-extrabold text-[28px] tracking-tight mb-4">01</div>
+              <h3 className="font-bold text-[15px] text-[#e0e0f0] mb-2">First Log In</h3>
+              <p className="text-[13px] text-[#555] leading-relaxed">Sign up with Google or GitHub, add your name, bio, email id or thorugh your github.You are good to go.</p>
             </div>
-          ))}
+
+            <div className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 transition-all duration-250">
+              <div className="text-[#6c63ff]/40 font-extrabold text-[28px] tracking-tight mb-4">02</div>
+              <h3 className="font-bold text-[15px] text-[#e0e0f0] mb-2">Create A Profile</h3>
+              <p className="text-[13px] text-[#555] leading-relaxed">Create your profile by adding your coverpic, name, email etc into the dashboard.</p>
+            </div>
+
+            <div className="bg-[#111118] border border-white/6 hover:border-[#a78bfa]/20 hover:bg-[#13131e] hover:-translate-y-1 rounded-[18px] p-7 transition-all duration-250">
+              <div className="text-[#6c63ff]/40 font-extrabold text-[28px] tracking-tight mb-4">03</div>
+              <h3 className="font-bold text-[15px] text-[#e0e0f0] mb-2">Receive support</h3>
+              <p className="text-[13px] text-[#555] leading-relaxed">Supporters visit your page, leave a message and pay any amount. Funds arrive in your account.</p>
+            </div>
+          </div>
         </div>
+
+
       </div>
 
       {/* Divider */}
