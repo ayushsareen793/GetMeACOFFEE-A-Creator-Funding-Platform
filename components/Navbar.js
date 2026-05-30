@@ -9,7 +9,6 @@ const Navbar = () => {
   const [showdropdown, setShowdropdown] = useState(false)
   const { data: session } = useSession()
 
-
   const dropdownRef = useRef(null)
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -23,53 +22,83 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex flex-col md:flex-row justify-between items-center px-8 md: h-20 z-50  bg-[#0c0c0e]/95 border-b border-white/6 backdrop-blur-xl sticky top-0  ">
+      <nav
+        className="flex flex-col md:flex-row justify-between items-center px-10 h-18 z-50 bg-black sticky top-0"
+        style={{ borderBottom: "2px solid #9333ea" }}
+      >
 
-        <Link className="flex items-center gap-2 font-bold text-[17px] tracking-tight text-[#f0f0f8]" href="/">
-          <div className="w-8.5 h-8.5 rounded-[10px] border border-[#a78bfa]/30 bg-[#a78bfa]/10 flex items-center justify-center">
-            <img src="/tea.gif" width={22} alt="" />
+        {/* Logo */}
+        <Link className="flex items-center gap-3 no-underline" href="/">
+          <div
+            className="w-11 h-11 bg-[#9333ea] flex items-center justify-center shrink-0"
+            style={{ clipPath: "polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)" }}
+          >
+            <img src="https://api.iconify.design/mdi/coffee.svg?color=white" width={22} height={22} alt="" />
           </div>
-          GetMeA<span className="text-[#a78bfa]">Coffee</span>
+          <span className="text-[22px] font-black uppercase tracking-tight text-white">
+            GET<span className="text-[#9333ea]">MEACOFFEE</span>
+          </span>
         </Link>
 
+        {/* Right side */}
         <div className="flex items-center gap-3 relative w-full md:w-auto justify-center md:justify-end">
+
           {session && (
             <div ref={dropdownRef}>
               <button
                 onClick={() => setShowdropdown(!showdropdown)}
-                className="flex items-center gap-2 bg-white/4 border border-white/8 hover:bg-white/8 hover:border-[#a78bfa]/30 text-[#b0b0c8] hover:text-[#e0e0f0] rounded-[10px] text-sm px-4 py-2 transition-all duration-200">
+                className="flex items-center gap-2 bg-[#9333ea]/10 border border-[#9333ea]/30 hover:bg-[#9333ea]/20 hover:border-[#a855f7] text-[#a855f7] hover:text-white text-[11px] font-bold  tracking-[0.08em] px-5 py-2.5 transition-all duration-200"
+                style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
+              >
                 {session.user.email}
-                <svg className={`w-3 h-3 text-[#666] transition-transform duration-200 ${showdropdown ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  className={`w-3 h-3 transition-transform duration-200 ${showdropdown ? "rotate-180" : ""}`}
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                >
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </button>
 
-              <div className={`absolute right-0 top-[calc(100%+8px)] w-45 rounded-[14px] border border-white/8 bg-[#13131a] shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-999 p-1.5 ${showdropdown ? "block" : "hidden"}`}>
-                <ul className="text-sm text-[#a0a0b8]">
+              {/* Dropdown */}
+              <div
+                className={`absolute right-0 top-[calc(100%+8px)] w-48 border border-[#9333ea]/30 bg-black shadow-[0_20px_60px_rgba(147,51,234,0.15)] z-999 p-1.5 ${showdropdown ? "block" : "hidden"}`}
+                style={{ clipPath: "polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)" }}
+              >
+                <ul className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#888]">
                   <li>
-                    <Link href="/" onClick={() => setShowdropdown(false)} className="block px-3.5 py-2.5 rounded-[9px] hover:bg-[#a78bfa]/8 hover:text-[#d0d0f0] transition-colors">
+                    <Link href="/" onClick={() => setShowdropdown(false)}
+                      className="block px-4 py-2.5 hover:bg-[#9333ea]/10 hover:text-[#a855f7] transition-colors no-underline text-[#888]">
                       Home
                     </Link>
                   </li>
                   <li>
-                    <Link href="/dashboard" onClick={() => setShowdropdown(false)} className="block px-3.5 py-2.5 rounded-[9px] hover:bg-[#a78bfa]/8 hover:text-[#d0d0f0] transition-colors">
+                    <Link href="/dashboard" onClick={() => setShowdropdown(false)}
+                      className="block px-4 py-2.5 hover:bg-[#9333ea]/10 hover:text-[#a855f7] transition-colors no-underline text-[#888]">
                       Dashboard
                     </Link>
                   </li>
                   <li>
-                    <Link href={`/${session?.user?.name}`} onClick={() => setShowdropdown(false)} className="block px-3.5 py-2.5 rounded-[9px] hover:bg-[#a78bfa]/8 hover:text-[#d0d0f0] transition-colors">
+                    <Link href={`/${session?.user?.name}`} onClick={() => setShowdropdown(false)}
+                      className="block px-4 py-2.5 hover:bg-[#9333ea]/10 hover:text-[#a855f7] transition-colors no-underline text-[#888]">
                       Profile
                     </Link>
                   </li>
                   <li>
-                    <Link href="/about" onClick={() => setShowdropdown(false)} className="block px-3.5 py-2.5 rounded-[9px] hover:bg-[#a78bfa]/8 hover:text-[#d0d0f0] transition-colors">
+                    <Link href="/about" onClick={() => setShowdropdown(false)}
+                      className="block px-4 py-2.5 hover:bg-[#9333ea]/10 hover:text-[#a855f7] transition-colors no-underline text-[#888]">
                       About Us
                     </Link>
                   </li>
 
-                  <li className="border-t border-white/6 mt-1 pt-1">
-                    <button onClick={() => {
-                      toast.success("logged out succesfully👋"); setTimeout(() => {signOut({ callbackUrl: "/" });}, 1200); setShowdropdown(false) }} className="w-full text-left px-3.5 py-2.5 rounded-[9px] text-[#888] hover:bg-red-500/8 hover:text-[#f87171] transition-colors">
+                  <li style={{ borderTop: "1px solid rgba(147,51,234,0.2)" }} className="mt-1 pt-1">
+                    <button
+                      onClick={() => {
+                        toast.success("Logged out successfully");
+                        setTimeout(() => { signOut({ callbackUrl: "/" }); }, 1200);
+                        setShowdropdown(false)
+                      }}
+                      className="w-full text-left px-4 py-2.5 text-[#666] hover:bg-red-500/10 hover:text-[#f87171] transition-colors text-[11px] font-bold uppercase tracking-[0.08em]"
+                    >
                       Sign out
                     </button>
                   </li>
@@ -80,14 +109,17 @@ const Navbar = () => {
 
           {!session && (
             <Link href="/Login">
-              <button className="bg-white/4 border border-white/8 hover:bg-white/8 hover:border-[#a78bfa]/30 text-[#b0b0c8] hover:text-[#e0e0f0] rounded-[10px] text-sm px-4 py-2 transition-all duration-200">
+              <button
+                className="bg-[#9333ea] hover:bg-[#a855f7] text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 transition-colors border-none cursor-pointer"
+                style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
+              >
                 Login
               </button>
             </Link>
           )}
+
         </div>
       </nav>
-
 
       <ToastContainer
         position="top-right"
@@ -95,18 +127,16 @@ const Navbar = () => {
         icon={false}
         theme="dark"
         toastStyle={{
-          background: "#1a1a24",
+          background: "#0d0d12",
           color: "#e0e0f0",
-          border: "1px solid rgba(167, 139, 250, 0.3)"
+          border: "1px solid rgba(147, 51, 234, 0.3)"
         }}
         progressStyle={{
-          background: "#a78bfa"
+          background: "#9333ea"
         }}
       />
     </>
   )
-
 }
-
 
 export default Navbar
