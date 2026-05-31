@@ -16,8 +16,7 @@ const Dashboard = () => {
         console.log(session)
         if (!session) {
             router.push('/login')
-        }
-        else {
+        } else {
             getData()
         }
     }, [])
@@ -37,7 +36,6 @@ const Dashboard = () => {
         const formData = new FormData(e.target)
         const data = Object.fromEntries(formData)
         await updateProfile(JSON.stringify(data), oldusername)
-
         toast('Profile Updated', {
             position: "top-right",
             autoClose: 5000,
@@ -65,226 +63,148 @@ const Dashboard = () => {
                 pauseOnHover
                 theme="dark"
             />
-            <ToastContainer />
 
             <div className="bg-black min-h-screen text-white">
 
-                {/* ── Header ── */}
-                <div className="px-16 pt-16 pb-10 relative overflow-hidden" style={{ borderBottom: "2px solid rgba(147,51,234,0.2)" }}>
-                    {/* Geometric bg */}
-                    <div className="absolute top-6 right-20 w-24 h-24 border-2 border-[#9333ea]/20 rotate-45 pointer-events-none" />
-                    <div className="absolute top-10 right-32 w-14 h-14 bg-[#4c1d95]/20 rotate-45 pointer-events-none" />
-                    <div className="absolute bottom-0 right-10 w-16 h-16 border border-[#9333ea]/15 -rotate-12 pointer-events-none" />
+                {/* heading */}
+                <div className="px-16 pt-16 pb-10 relative overflow-hidden border-b-2 border-purple-600/20">
+                    <div className="absolute top-6 right-20 w-24 h-24 border-2 border-purple-600/20 rotate-45 pointer-events-none" />
+                    <div className="absolute top-10 right-32 w-14 h-14 bg-purple-900/20 rotate-45 pointer-events-none" />
+                    <div className="absolute bottom-0 right-10 w-16 h-16 border border-purple-600/15 -rotate-12 pointer-events-none" />
 
-                    <div className="inline-flex items-center gap-2 bg-[#9333ea]/10 border border-[#9333ea]/25 text-[#a855f7] text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 mb-6 w-fit">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#9333ea]" />
+                    <div className="inline-flex items-center gap-2 bg-purple-600/10 border border-purple-600/25 text-purple-400 text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 mb-6 w-fit">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-600" />
                         Creator Dashboard
                     </div>
 
-                    <h1
-                        className="font-black leading-[0.92] tracking-[-0.04em]"
-                        style={{ fontSize: "clamp(40px, 5vw, 64px)" }}
-                    >
+                    <h1 className="font-black leading-[0.92] tracking-[-0.04em] text-[clamp(40px,5vw,64px)]">
                         Welcome back,<br />
-                        <span className="text-[#a855f7]">{session?.user?.name || "Creator"}</span>
+                        <span className="text-purple-400">{session?.user?.name || "Creator"}</span>
                     </h1>
                 </div>
 
-                {/* ── Form ── */}
-                <form onSubmit={handleSubmit} action={handleSubmit}>
+                
+                <form onSubmit={handleSubmit}>
                     <div className="max-w-225 mx-auto px-16 py-16 flex flex-col gap-16">
 
-                        {/* ── Section 01 — Basic Info ── */}
+                        {/*  basic information */}
                         <div className="grid grid-cols-2 gap-17 items-start">
 
-                            {/* Left label */}
                             <div>
-                                <div className="inline-flex items-center gap-2 bg-[#9333ea]/10 border border-[#9333ea]/25 text-[#a855f7] text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
-                                    <span className="text-[#9333ea]/60 font-black">01</span>
+                                <div className="inline-flex items-center gap-2 bg-purple-600/10 border border-purple-600/25 text-purple-400 text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
+                                    <span className="text-purple-600/60 font-black">01</span>
                                     Basic Information
                                 </div>
-                                <h2 className="font-black tracking-[-0.03em] text-white mb-4" style={{ fontSize: "clamp(20px,2.5vw,28px)" }}>
-                                    Your public<br /><span className="text-[#a855f7]">profile details</span>
+                                <h2 className="font-black tracking-[-0.03em] text-white mb-4 text-[clamp(20px,2.5vw,28px)]">
+                                    Your public<br /><span className="text-purple-400">profile details</span>
                                 </h2>
-                                <div className="border-l-4 border-[#9333ea] pl-5">
+                                <div className="border-l-4 border-purple-600 pl-5">
                                     <p className="text-[#555] text-[13px] leading-[1.8]">This is what your supporters see when they visit your page. Make it count.</p>
                                 </div>
                             </div>
 
-                            {/* Right fields */}
-                            <div
-                                className="bg-black border-2 border-[#9333ea] p-8"
-                                style={{ clipPath: "polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)" }}
-                            >
+                            <div className="bg-black border-2 border-purple-600 p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
                                 <div className="flex flex-col gap-5">
-
                                     <div className="grid grid-cols-2 gap-5">
                                         <div>
                                             <label htmlFor="name" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Name</label>
-                                            <input
-                                                value={form.name ? form.name : ""}
-                                                onChange={handleChange}
-                                                type="text" name="name" id="name"
-                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-[#9333ea]/40 focus:border-[#a855f7] focus:outline-none transition-colors"
-                                                style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
-                                            />
+                                            <input value={form.name || ""} onChange={handleChange} type="text" name="name" id="name"
+                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
                                         </div>
                                         <div>
                                             <label htmlFor="username" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Username</label>
-                                            <input
-                                                value={form.username ? form.username : ""}
-                                                onChange={handleChange}
-                                                type="text" name="username" id="username"
-                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-[#9333ea]/40 focus:border-[#a855f7] focus:outline-none transition-colors"
-                                                style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
-                                            />
+                                            <input value={form.username || ""} onChange={handleChange} type="text" name="username" id="username"
+                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
                                         </div>
                                     </div>
-
                                     <div>
                                         <label htmlFor="email" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Email</label>
-                                        <input
-                                            value={form.email ? form.email : ""}
-                                            onChange={handleChange}
-                                            type="email" name="email" id="email"
-                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-[#9333ea]/40 focus:border-[#a855f7] focus:outline-none transition-colors"
-                                            style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
-                                        />
+                                        <input value={form.email || ""} onChange={handleChange} type="email" name="email" id="email"
+                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
                                     </div>
-
                                 </div>
                             </div>
                         </div>
 
-                        {/* ── Divider ── */}
-                        <div className="h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.07) 50%,transparent)" }} />
+                        {/* divider */}
+                        <div className="h-px bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
 
-                        {/* ── Section 02 — Images ── */}
+                        {/*  Images */}
                         <div className="grid grid-cols-2 gap-17 items-start">
 
-                            {/* Left label */}
                             <div>
-                                <div className="inline-flex items-center gap-2 bg-[#9333ea]/10 border border-[#9333ea]/25 text-[#a855f7] text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
-                                    <span className="text-[#9333ea]/60 font-black">02</span>
+                                <div className="inline-flex items-center gap-2 bg-purple-600/10 border border-purple-600/25 text-purple-400 text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
+                                    <span className="text-purple-600/60 font-black">02</span>
                                     Images
                                 </div>
-                                <h2 className="font-black tracking-[-0.03em] text-white mb-4" style={{ fontSize: "clamp(20px,2.5vw,28px)" }}>
-                                    Profile &amp;<br /><span className="text-[#a855f7]">cover photos</span>
+                                <h2 className="font-black tracking-[-0.03em] text-white mb-4 text-[clamp(20px,2.5vw,28px)]">
+                                    Profile &amp;<br /><span className="text-purple-400">cover photos</span>
                                 </h2>
-                                <div className="border-l-4 border-[#9333ea] pl-5">
+                                <div className="border-l-4 border-purple-600 pl-5">
                                     <p className="text-[#555] text-[13px] leading-[1.8]">Paste a direct image URL for your profile picture and cover banner.</p>
                                 </div>
                             </div>
 
-                            {/* Right fields */}
-                            <div
-                                className="bg-black border-2 border-[#9333ea] p-8"
-                                style={{ clipPath: "polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)" }}
-                            >
+                            <div className="bg-black border-2 border-purple-600 p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
                                 <div className="flex flex-col gap-5">
-
                                     <div>
                                         <label htmlFor="profilepic" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Profile Picture</label>
-                                        <input
-                                            value={form.profilepic ? form.profilepic : ""}
-                                            onChange={handleChange}
-                                            type="text" name="profilepic" id="profilepic"
-                                            placeholder="https://..."
-                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-[#9333ea]/40 focus:border-[#a855f7] focus:outline-none transition-colors placeholder:text-[#333]"
-                                            style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
-                                        />
+                                        <input value={form.profilepic || ""} onChange={handleChange} type="text" name="profilepic" id="profilepic" placeholder="https://..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
                                     </div>
-
                                     <div>
                                         <label htmlFor="coverpic" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Cover Picture</label>
-                                        <input
-                                            value={form.coverpic ? form.coverpic : ""}
-                                            onChange={handleChange}
-                                            type="text" name="coverpic" id="coverpic"
-                                            placeholder="https://..."
-                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-[#9333ea]/40 focus:border-[#a855f7] focus:outline-none transition-colors placeholder:text-[#333]"
-                                            style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
-                                        />
+                                        <input value={form.coverpic || ""} onChange={handleChange} type="text" name="coverpic" id="coverpic" placeholder="https://..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
                                     </div>
-
                                 </div>
                             </div>
                         </div>
 
-                        {/* ── Divider ── */}
-                        <div className="h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.07) 50%,transparent)" }} />
+                        {/* divider */}
+                        <div className="h-px bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
 
-                        {/* ── Section 03 — Payment ── */}
+                        {/*  razorpay id and secret section*/}
                         <div className="grid grid-cols-2 gap-17 items-start">
 
-                            {/* Left label */}
                             <div>
-                                <div className="inline-flex items-center gap-2 bg-[#9333ea]/10 border border-[#9333ea]/25 text-[#a855f7] text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
-                                    <span className="text-[#9333ea]/60 font-black">03</span>
+                                <div className="inline-flex items-center gap-2 bg-purple-600/10 border border-purple-600/25 text-purple-400 text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
+                                    <span className="text-purple-600/60 font-black">03</span>
                                     Payment Details
                                 </div>
-                                <h2 className="font-black tracking-[-0.03em] text-white mb-4" style={{ fontSize: "clamp(20px,2.5vw,28px)" }}>
-                                    Connect your<br /><span className="text-[#a855f7]">Razorpay account</span>
+                                <h2 className="font-black tracking-[-0.03em] text-white mb-4 text-[clamp(20px,2.5vw,28px)]">
+                                    Connect your<br /><span className="text-purple-400">Razorpay account</span>
                                 </h2>
-                                <div className="border-l-4 border-[#9333ea] pl-5">
+                                <div className="border-l-4 border-purple-600 pl-5">
                                     <p className="text-[#555] text-[13px] leading-[1.8]">Your Key ID and Secret are used to process payments. Never share your secret with anyone.</p>
                                 </div>
                             </div>
 
-                            {/* Right fields */}
-                            <div
-                                className="bg-black border-2 border-[#9333ea] p-8"
-                                style={{ clipPath: "polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)" }}
-                            >
-                                {/* Razorpay label strip */}
+                            <div className="bg-black border-2 border-purple-600 p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <div className="flex-1 h-px" style={{ background: "rgba(147,51,234,0.2)" }} />
-                                    <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#a855f7] border border-[#9333ea]/30 px-3 py-1 bg-[#9333ea]/10">Razorpay</span>
-                                    <div className="flex-1 h-px" style={{ background: "rgba(147,51,234,0.2)" }} />
+                                    <div className="flex-1 h-px bg-purple-600/20" />
+                                    <span className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-400 border border-purple-600/30 px-3 py-1 bg-purple-600/10">Razorpay</span>
+                                    <div className="flex-1 h-px bg-purple-600/20" />
                                 </div>
-
                                 <div className="flex flex-col gap-5">
-
                                     <div>
                                         <label htmlFor="razorpayid" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Razorpay ID</label>
-                                        <input
-                                            value={form.razorpayid ? form.razorpayid : ""}
-                                            onChange={handleChange}
-                                            type="text" name="razorpayid" id="razorpayid"
-                                            placeholder="rzp_live_..."
-                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-[#9333ea]/40 focus:border-[#a855f7] focus:outline-none transition-colors placeholder:text-[#333]"
-                                            style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
-                                        />
+                                        <input value={form.razorpayid || ""} onChange={handleChange} type="text" name="razorpayid" id="razorpayid" placeholder="rzp_live_..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
                                         <p className="text-[11px] mt-1.5 text-[#444]">Key ID from your Razorpay dashboard</p>
                                     </div>
-
                                     <div>
                                         <label htmlFor="razorpaysecret" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Razorpay Secret</label>
-                                        <input
-                                            value={form.razorpaysecret ? form.razorpaysecret : ""}
-                                            onChange={handleChange}
-                                            type="password" name="razorpaysecret" id="razorpaysecret"
-                                            placeholder="••••••••••••"
-                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-[#9333ea]/40 focus:border-[#a855f7] focus:outline-none transition-colors placeholder:text-[#333]"
-                                            style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}
-                                        />
+                                        <input value={form.razorpaysecret || ""} onChange={handleChange} type="password" name="razorpaysecret" id="razorpaysecret" placeholder="••••••••••••" className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
                                         <p className="text-[11px] mt-1.5 text-[#444]">Never share this with anyone</p>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
 
-                        {/* ── Divider ── */}
-                        <div className="h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.07) 50%,transparent)" }} />
+                        {/* divider */}
+                        <div className="h-px bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
 
-                        {/* ── Save button ── */}
+                        {/* Save button */}
                         <div className="flex justify-center">
-                            <button
-                                type="submit"
-                                className="bg-[#9333ea] hover:bg-[#a855f7] text-white font-bold text-[12px] uppercase tracking-[0.08em] px-12 py-4 transition-colors border-none cursor-pointer"
-                                style={{ clipPath: "polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)" }}
-                            >
+                            <button type="submit" className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-12 py-4 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
                                 Save Changes
                             </button>
                         </div>
