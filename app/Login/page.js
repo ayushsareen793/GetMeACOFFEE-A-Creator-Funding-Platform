@@ -86,17 +86,13 @@ const Login = () => {
 
         {/* Social buttons */}
         <div className="flex flex-col gap-3 mb-8">
-          <button
-            onClick={() => { signIn("github") }}
-            className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" className="h-4 w-4" />
-            Continue with GitHub
-          </button>
-
-          <button
-            className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
+          <button onClick={()=>{signIn("google")}} className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer">
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="h-4 w-4" />
             Continue with Google
+          </button>
+          <button onClick={() => { signIn("github") }} className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" className="h-4 w-4" />
+            Continue with GitHub
           </button>
         </div>
 
@@ -121,12 +117,8 @@ const Login = () => {
               className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
           </div>
 
-          <div className="text-right">
-            <a href="#" className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#555] hover:text-purple-400 transition-colors">Forgot Password?</a>
-          </div>
-
           <button type="submit"
-            className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
+            className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4 transition-colors border-none cursor-pointer">
             Login
           </button>
         </form>

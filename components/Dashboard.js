@@ -1,3 +1,4 @@
+
 "use client"
 import React, { useEffect, useState } from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
@@ -7,24 +8,30 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Bounce } from 'react-toastify';
 
 const Dashboard = () => {
-    const { data: session, update } = useSession()
+    const { data: session, status, update } = useSession()
     const router = useRouter()
     const [form, setform] = useState({})
     const [oldusername, setOldusername] = useState("")
 
     useEffect(() => {
-        console.log(session)
-        if (!session) {
+        if (status === "loading") return
+        if (status === "unauthenticated") {
             router.push('/login')
-        } else {
+            return
+        }
+        if (session?.user?.name) {
             getData()
         }
-    }, [])
+    }, [session, status])
 
     const getData = async () => {
+        // Clear out any previous user's data immediately so it never flashes/stays on screen while the new user's data loads.
+        setform({})
+        setOldusername("")
+
         let u = await fetchuser(session.user.name)
-        setform(u)
-        setOldusername(u.username)
+        setform(u || {})
+        setOldusername(u?.username || "")
     }
 
     const handleChange = (e) => {
@@ -87,6 +94,9 @@ const Dashboard = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="max-w-225 mx-auto px-16 py-16 flex flex-col gap-16">
 
+
+
+
                         {/*  basic information */}
                         <div className="grid grid-cols-2 gap-17 items-start">
 
@@ -103,31 +113,38 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
-                            <div className="bg-black border-2 border-purple-600 p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+                            <div className="bg-black border-2 border-purple-600 p-8 ">
                                 <div className="flex flex-col gap-5">
                                     <div className="grid grid-cols-2 gap-5">
                                         <div>
                                             <label htmlFor="name" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Name</label>
                                             <input value={form.name || ""} onChange={handleChange} type="text" name="name" id="name"
-                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
+                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors"/>
                                         </div>
                                         <div>
                                             <label htmlFor="username" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Username</label>
                                             <input value={form.username || ""} onChange={handleChange} type="text" name="username" id="username"
-                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
+                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors " />
                                         </div>
                                     </div>
                                     <div>
                                         <label htmlFor="email" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Email</label>
                                         <input value={form.email || ""} onChange={handleChange} type="email" name="email" id="email"
-                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
+                                            className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors " />
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+
+
+
                         {/* divider */}
                         <div className="h-px bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
+
 
                         {/*  Images */}
                         <div className="grid grid-cols-2 gap-17 items-start">
@@ -145,22 +162,28 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
-                            <div className="bg-black border-2 border-purple-600 p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+                            <div className="bg-black border-2 border-purple-600 p-8">
                                 <div className="flex flex-col gap-5">
                                     <div>
                                         <label htmlFor="profilepic" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Profile Picture</label>
-                                        <input value={form.profilepic || ""} onChange={handleChange} type="text" name="profilepic" id="profilepic" placeholder="https://..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
+                                        <input value={form.profilepic || ""} onChange={handleChange} type="text" name="profilepic" id="profilepic" placeholder="https://..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] " />
                                     </div>
                                     <div>
                                         <label htmlFor="coverpic" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Cover Picture</label>
-                                        <input value={form.coverpic || ""} onChange={handleChange} type="text" name="coverpic" id="coverpic" placeholder="https://..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
+                                        <input value={form.coverpic || ""} onChange={handleChange} type="text" name="coverpic" id="coverpic" placeholder="https://..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] " />
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+
+
+
                         {/* divider */}
                         <div className="h-px bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
 
                         {/*  razorpay id and secret section*/}
                         <div className="grid grid-cols-2 gap-17 items-start">
@@ -178,7 +201,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
-                            <div className="bg-black border-2 border-purple-600 p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+                            <div className="bg-black border-2 border-purple-600 p-8 ">
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="flex-1 h-px bg-purple-600/20" />
                                     <span className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-400 border border-purple-600/30 px-3 py-1 bg-purple-600/10">Razorpay</span>
@@ -187,20 +210,27 @@ const Dashboard = () => {
                                 <div className="flex flex-col gap-5">
                                     <div>
                                         <label htmlFor="razorpayid" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Razorpay ID</label>
-                                        <input value={form.razorpayid || ""} onChange={handleChange} type="text" name="razorpayid" id="razorpayid" placeholder="rzp_live_..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
+                                        <input value={form.razorpayid || ""} onChange={handleChange} type="text" name="razorpayid" id="razorpayid" placeholder="rzp_live_..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] " />
                                         <p className="text-[11px] mt-1.5 text-[#444]">Key ID from your Razorpay dashboard</p>
                                     </div>
                                     <div>
                                         <label htmlFor="razorpaysecret" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Razorpay Secret</label>
-                                        <input value={form.razorpaysecret || ""} onChange={handleChange} type="password" name="razorpaysecret" id="razorpaysecret" placeholder="••••••••••••" className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]" />
+                                        <input value={form.razorpaysecret || ""} onChange={handleChange} type="password" name="razorpaysecret" id="razorpaysecret" placeholder="••••••••••••" className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] " />
                                         <p className="text-[11px] mt-1.5 text-[#444]">Never share this with anyone</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+
+
+
                         {/* divider */}
                         <div className="h-px bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
+
 
                         {/* Save button */}
                         <div className="flex justify-center">

@@ -1,3 +1,4 @@
+
 "use client"
 import React, { useState } from 'react'
 import { useEffect } from 'react'
@@ -9,10 +10,11 @@ const PaymentPage = ({ username }) => {
   const [paymentform, setpaymentform] = useState({name:"",message:"",amount:""})
   const [currentuser, setcurrentuser] = useState({})
   const [payments, setpayments] = useState([])
+  const [memberCount, setmemberCount] = useState(0)
  
   useEffect(() => {
     getData()
-  }, [])
+  }, [username])
  
   const handlechange = (e) => {
     setpaymentform({ ...paymentform, [e.target.name]: e.target.value })
@@ -23,6 +25,8 @@ const PaymentPage = ({ username }) => {
     setcurrentuser(u)
     let dbpayments = await fetchpayments(username)
     setpayments(dbpayments)
+    setmemberCount(0)
+
     console.log(u, dbpayments);
   }
  
@@ -38,7 +42,7 @@ const PaymentPage = ({ username }) => {
       "image": "https://example.com/your_logo",
       "order_id": orderID,
       "callback_url": `${process.env.NEXT_PUBLIC_URL}/api/razorpay`,
-      "prefill": { "name": "Gaurav Kumar", "email": "gaurav.kumar@example.com", "contact": "+919876543210" },
+      "prefill": { "name": paymentform.name, "email": "", "contact": "" },
       "notes": { "address": "Razorpay Corporate Office" },
       "theme": { "color": "#3399cc" }
     }
@@ -52,13 +56,13 @@ const PaymentPage = ({ username }) => {
  
       <div className="bg-black min-h-screen text-white">
  
-        {/* Cover + Profile  */}
+        {/* Cover and Profile  */}
         <div className="relative w-full">
           <img className="object-cover w-full h-80" src={currentuser?.coverpic} />
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black" />
           <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2">
             <div className="border-4 border-[#9333ea] bg-black [clip-path:polygon(0_0,calc(100%-12px)_0,100%_12px,100%_100%,0_100%)]">
-              <img width={120} height={120} src={currentuser?.profilepic} alt="" className="block [clip-path:polygon(0_0,calc(100%-12px)_0,100%_12px,100%_100%,0_100%)]" />
+              <img width={120} height={120} src={currentuser?.profilepic} alt="" className="block" />
             </div>
           </div>
         </div>
@@ -73,13 +77,9 @@ const PaymentPage = ({ username }) => {
           <p className="text-[#555] text-[13px] uppercase tracking-[0.08em] mb-10">All contributions are sent anonymously</p>
  
           {/* Stats */}
-          <div className="grid grid-cols-4 border-t-2 border-[#9333ea]/20">
+          <div className="grid grid-cols-3 border-t-2 border-[#9333ea]/20">
             <div className="pt-6 pr-10 border-r-2 border-[#9333ea]/20">
-              <div className="text-[28px] font-black tracking-[-0.03em] leading-none text-white">141</div>
-              <div className="text-[11px] text-[#555] uppercase tracking-[0.08em] mt-1">Posts</div>
-            </div>
-            <div className="pt-6 px-10 border-r-2 border-[#9333ea]/20">
-              <div className="text-[28px] font-black tracking-[-0.03em] leading-none text-white">600</div>
+              <div className="text-[28px] font-black tracking-[-0.03em] leading-none text-white">{memberCount}</div>
               <div className="text-[11px] text-[#555] uppercase tracking-[0.08em] mt-1">Members</div>
             </div>
             <div className="pt-6 px-10 border-r-2 border-[#9333ea]/20">
@@ -91,12 +91,6 @@ const PaymentPage = ({ username }) => {
               <div className="text-[11px] text-[#555] uppercase tracking-[0.08em] mt-1">Payments</div>
             </div>
           </div>
- 
-          {/*  buttons */}
-          <div className="flex gap-4 mt-10">
-            <button className="bg-[#9333ea] hover:bg-[#a855f7] text-white font-bold text-[12px] uppercase tracking-[0.08em] px-8 py-3.5 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">Join Membership</button>
-            <button className="bg-black border-2 border-[#9333ea]/40 hover:border-[#a855f7] hover:bg-[#0d0d18] text-[#888] hover:text-white font-bold text-[12px] uppercase tracking-[0.08em] px-8 py-3.5 transition-colors cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">See Membership Options</button>
-          </div>
         </div>
  
         {/*  divider */}
@@ -106,7 +100,7 @@ const PaymentPage = ({ username }) => {
         <div className="grid grid-cols-2 gap-10 px-16 py-16">
  
           {/* Top Supporters */}
-          <div className="bg-black border-2 border-[#9333ea] p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+          <div className="bg-black border-2 border-[#9333ea] p-8">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#9333ea] mb-2">Leaderboard</p>
             <h2 className="font-black tracking-[-0.03em] text-white text-2xl mb-8">Top 10 <span className="text-[#444]">Supporters</span></h2>
  
@@ -131,7 +125,7 @@ const PaymentPage = ({ username }) => {
           </div>
  
           {/* Make a Payment */}
-          <div className="bg-black border-2 border-[#9333ea] p-8 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+          <div className="bg-black border-2 border-[#9333ea] p-8">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#9333ea] mb-2">Support</p>
             <h2 className="font-black tracking-[-0.03em] text-white text-2xl mb-8">Make a <span className="text-[#444]">Payment</span></h2>
  

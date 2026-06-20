@@ -41,7 +41,7 @@ const AboutPage = () => {
           </div>
 
           <div className="flex gap-4 mb-16 flex-wrap">
-            <button onClick={handlebutton} className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
+            <button onClick={handlebutton} className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors border-none cursor-pointer">
               Start Here
             </button>
           </div>
@@ -94,7 +94,7 @@ const AboutPage = () => {
         <div className="grid grid-cols-3 gap-10">
 
           <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 text-center transition-all duration-200 hover:-translate-y-1 cursor-default">
-            <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
+            <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5 [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]" >
               <img src="https://img.icons8.com/?size=160&id=58915&format=png" alt="" className="w-8 h-8 object-contain" />
             </div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Zero Friction</h3>
@@ -102,7 +102,7 @@ const AboutPage = () => {
           </div>
 
           <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 text-center transition-all duration-200 hover:-translate-y-1 cursor-default">
-            <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
+            <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5">
               <img src="https://img.icons8.com/color/48/combo-chart.png" alt="" className="w-8 h-8 object-contain" />
             </div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Full Dashboard</h3>
@@ -110,7 +110,7 @@ const AboutPage = () => {
           </div>
 
           <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 text-center transition-all duration-200 hover:-translate-y-1 cursor-default">
-            <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
+            <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5">
               <img src="https://img.icons8.com/color/48/lock-2.png" alt="" className="w-8 h-8 object-contain" />
             </div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Always Secure</h3>
@@ -199,19 +199,19 @@ const AboutPage = () => {
 
         <div className="grid grid-cols-3 gap-10">
 
-          <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 transition-all duration-200 hover:-translate-y-1 cursor-default [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+          <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 transition-all duration-200 hover:-translate-y-1 cursor-default">
             <div className="text-purple-600/30 font-black text-[36px] tracking-[-0.04em] leading-none mb-4">01</div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">First Log In</h3>
             <p className="text-[13px] text-[#505068] leading-[1.65]">Sign up with Google or GitHub, add your name, bio, and email. You are good to go.</p>
           </div>
 
-          <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 transition-all duration-200 hover:-translate-y-1 cursor-default [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+          <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 transition-all duration-200 hover:-translate-y-1 cursor-default">
             <div className="text-purple-600/30 font-black text-[36px] tracking-[-0.04em] leading-none mb-4">02</div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Create A Profile</h3>
             <p className="text-[13px] text-[#505068] leading-[1.65]">Add your cover pic, name, and email in the dashboard to get your page live.</p>
           </div>
 
-          <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 transition-all duration-200 hover:-translate-y-1 cursor-default [clip-path:polygon(0_0,calc(100%-14px)_0,100%_14px,100%_100%,0_100%)]">
+          <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 transition-all duration-200 hover:-translate-y-1 cursor-default">
             <div className="text-purple-600/30 font-black text-[36px] tracking-[-0.04em] leading-none mb-4">03</div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Receive Support</h3>
             <p className="text-[13px] text-[#505068] leading-[1.65]">Supporters visit your page, leave a message and pay. Funds arrive in your account.</p>
@@ -309,7 +309,7 @@ const AboutPage = () => {
           </div>
 
           <div>
-            <button onClick={handlebutton} className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
+            <button onClick={handlebutton} className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors border-none cursor-pointer">
               Create your page,it&apos;s free
             </button>
           </div>

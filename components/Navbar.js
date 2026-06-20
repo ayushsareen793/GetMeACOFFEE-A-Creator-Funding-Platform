@@ -38,10 +38,8 @@ const Navbar = () => {
 
           {session && (
             <div ref={dropdownRef}>
-              <button
-                onClick={() => setShowdropdown(!showdropdown)}
-                className="flex items-center gap-2 bg-purple-600/10 border border-purple-600/30 hover:bg-purple-600/20 hover:border-purple-500 text-purple-400 hover:text-white text-[11px] font-bold tracking-[0.08em] px-5 py-2.5 transition-all duration-200 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
-                {session.user.email}
+              <button onClick={() => setShowdropdown(!showdropdown)} className="flex items-center gap-2 bg-purple-600/10 border border-purple-600/30 hover:bg-purple-600/20 hover:border-purple-500 text-purple-400 hover:text-white text-[11px] font-bold tracking-[0.08em] px-5 py-2.5 transition-all duration-200">
+                 Welcome, {session.user.email}
                 <svg className={`w-3 h-3 transition-transform duration-200 ${showdropdown ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="m6 9 6 6 6-6" />
                 </svg>
@@ -84,7 +82,7 @@ const Navbar = () => {
 
           {!session && (
             <Link href="/Login">
-              <button className="bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
+              <button className="bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-black uppercase tracking-widest px-6 py-3 transition-colors border-none cursor-pointer">
                 Login
               </button>
             </Link>

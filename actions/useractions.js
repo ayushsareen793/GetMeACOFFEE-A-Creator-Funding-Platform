@@ -52,3 +52,20 @@ export const updateProfile = async (data, oldusername) => {
     }
     await User.updateOne({ email: ndata.email }, ndata)
 }
+
+
+
+// explaination in plain terms:
+
+// initiate → Someone wants to send you money. This creates a payment order with Razorpay, and saves a "pending payment" entry in the database. Then it gives the frontend what it needs to show the actual payment popup.
+// fetchuser → Someone visits your profile page. This goes and fetches your user info from the database so the page can show your name, photo, etc.
+// fetchpayments → This fetches your top 10 highest payments received, so they can be shown on your page (like "top supporters").
+// updateProfile → You edited your profile (name, username, etc.) and hit save. This checks if your new username is free, and if yes, updates your info in the database.
+
+
+// This file = the part of your code that talks to the database.
+// Your frontend (the page someone sees and clicks buttons on) can't directly touch the database — that would be unsafe, and also Next.js doesn't let it work that way. So whenever your frontend needs to save something or get something, it calls one of these functions, and these functions do the actual work with the database.
+// Think of it like a waiter in a restaurant:
+
+// You (the client/frontend) tell the waiter what you want
+// The waiter (this file) goes to the kitchen (database) and either brings food (data) back, or tells the kitchen to cook something new (save data)

@@ -34,7 +34,7 @@ export default function page() {
           </div>
 
           <div className="flex gap-4 mb-16 flex-wrap">
-            <button onClick={() => session ? router.push("/dashboard") : router.push("/Login")} className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
+            <button onClick={() => session ? router.push("/dashboard") : router.push("/Login")} className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors border-none cursor-pointer">
               Start Here
             </button>
             <button onClick={() => router.push("/about")} className="bg-black border-2 border-purple-600 hover:bg-purple-600/10 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors cursor-pointer">
