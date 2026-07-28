@@ -20,6 +20,7 @@ const PaymentPage = ({ username }) => {
     setpaymentform({ ...paymentform, [e.target.name]: e.target.value })
   }
  
+  //to fetch username
   const getData = async (params) => {
     let u = await fetchuser(username)
     setcurrentuser(u)
@@ -123,6 +124,8 @@ const PaymentPage = ({ username }) => {
               ))}
             </ul>
           </div>
+
+
  
           {/* Make a Payment */}
           <div className="bg-black border-2 border-[#9333ea] p-8">
