@@ -24,7 +24,7 @@ const Dashboard = () => {
     }, [session, status])
 
     const getData = async () => {
-        // Clear out any previous user's data immediately so it never flashes/stays on screen while the new user's data loads.
+        // Clear out any previous user's data immediately so it never stays on screen while the new user's data loads.
         setform({})
         setOldusername("")
 
@@ -217,6 +217,40 @@ const Dashboard = () => {
                                         <input value={form.razorpaysecret || ""} onChange={handleChange} type="password" name="razorpaysecret" id="razorpaysecret" placeholder="••••••••••••" className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] " />
                                         <p className="text-[11px] mt-1.5 text-[#444]">Never share this with anyone</p>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        {/* divider */}
+                        <div className="h-px bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
+
+                        {/*  bio section */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-17 items-start">
+
+                            <div>
+                                <div className="inline-flex items-center gap-2 bg-purple-600/10 border border-purple-600/25 text-purple-400 text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
+                                    <span className="text-purple-600/60 font-black">04</span>
+                                    About You
+                                </div>
+                                <h2 className="font-black tracking-[-0.03em] text-white mb-4 text-[clamp(20px,2.5vw,28px)]">
+                                    Tell supporters<br /><span className="text-purple-400">what you create</span>
+                                </h2>
+                                <div className="border-l-4 border-purple-600 pl-5">
+                                    <p className="text-[#555] text-[13px] leading-[1.8]">Describe the kind of content you post — streams, art, tutorials, music, whatever it is. This shows up on your public page and helps people decide to support you.</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-black border-2 border-purple-600 p-5 sm:p-8">
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="bio" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Bio</label>
+                                    <textarea value={form.bio || ""} onChange={handleChange} name="bio" id="bio" rows={5} maxLength={500} placeholder="I make weekly coding tutorials on full-stack web dev, plus the occasional live debugging stream..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] resize-none"/>
+                                    <p className="text-[11px] text-[#444] text-right">{(form.bio || "").length}/500</p>
                                 </div>
                             </div>
                         </div>
