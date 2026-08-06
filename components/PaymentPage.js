@@ -94,7 +94,7 @@ const PaymentPage = ({ username }) => {
           </div>
         </div>
 
-        {/* About This Creator / Bio */}
+        {/* About Creator / Bio */}
         <div className="px-6 sm:px-10 md:px-16 py-10 md:py-14 border-b-2 border-[#9333ea]/20">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#9333ea] mb-3">About This Creator</p>
@@ -153,7 +153,7 @@ const PaymentPage = ({ username }) => {
           </div>
 
 
-          {/* Make a Payment */}
+          {/* Make  Payment */}
           <div className="bg-black border-2 border-[#9333ea] p-5 sm:p-8">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#9333ea] mb-2">Support</p>
             <h2 className="font-black tracking-[-0.03em] text-white text-2xl mb-8">Make a <span className="text-[#444]">Payment</span></h2>

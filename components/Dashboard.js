@@ -24,7 +24,7 @@ const Dashboard = () => {
     }, [session, status])
 
     const getData = async () => {
-        // Clear out any previous user's data immediately so it never stays on screen while the new user's data loads.
+        // Clear out any previous user's data taaki it does not stay on the screen
         setform({})
         setOldusername("")
 
@@ -145,7 +145,7 @@ const Dashboard = () => {
 
 
 
-                        {/*  Images */}
+                        {/*  cover photo and profile pic */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-17 items-start">
 
                             <div>
@@ -230,7 +230,7 @@ const Dashboard = () => {
 
 
 
-                        {/*  bio section */}
+                        {/*  about or bio section */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-17 items-start">
 
                             <div>
