@@ -98,7 +98,7 @@ const AboutPage = () => {
               <img src="https://img.icons8.com/?size=160&id=58915&format=png" alt="" className="w-8 h-8 object-contain" />
             </div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Zero Friction</h3>
-            <p className="text-[13px] text-[#505068] leading-[1.65]">Supporters land on your page, pick an amount and send — done. No account needed.</p>
+            <p className="text-[13px] text-[#505068] leading-[1.65]">Supporters land on your page, pick an amount and send, done. No account needed.</p>
           </div>
 
           <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 text-center transition-all duration-200 hover:-translate-y-1 cursor-default">
@@ -136,7 +136,7 @@ const AboutPage = () => {
             </h2>
             <div className="border-l-4 border-purple-600 pl-5">
               <p className="text-[#666] text-[15px] leading-[1.85]">
-                We believe every creator deserves to be supported for the value they bring. Whether you&apos;re a writer, artist, developer, or musician — your work matters.
+                We believe every creator deserves to be supported for the value they bring. Whether you&apos;re a writer, artist, developer, or musician, your work matters.
               </p>
             </div>
           </div>
@@ -223,62 +223,64 @@ const AboutPage = () => {
       {/* divider */}
       <div className="h-px mx-6 sm:mx-10 bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
 
-      {/* Testimonials */}
+      {/* replaced testimonials with this since i dont have real users yet */}
+      {/* TO do after users: swap this out once i actually have creators using the platform */}
       <div className="max-w-225 mx-auto px-6 sm:px-10 py-14 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-17 items-start">
 
-          <div className="lg:pt-20">
+          <div className="lg:sticky lg:top-20">
             <div className="inline-flex items-center bg-purple-600/10 border border-purple-600/25 text-purple-400 text-[11px] font-black px-3 py-1.5 uppercase tracking-[0.08em] mb-5">
-              Creators love us
+              Behind the project
             </div>
             <h2 className="font-black tracking-[-0.03em] text-white mb-6 text-[clamp(28px,3.5vw,42px)]">
-              What people are<br /><span className="text-purple-400">saying</span>
+              Built by a creator,<br /><span className="text-purple-400">for creators</span>
             </h2>
             <div className="border-l-4 border-purple-600 pl-5">
               <p className="text-[#666] text-[15px] leading-[1.85]">
-                Thousands of creators trust GetMeACoffee to connect with their audience and grow their work every day.
+                GetMeACoffee started as a simple idea: every creator deserves a frictionless way to be appreciated. Here&apos;s what went into building it.
               </p>
             </div>
           </div>
 
           <div className="flex flex-col gap-4">
 
-            <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-7 transition-all duration-200">
-              <p className="text-[13px] text-[#505068] leading-[1.65] mb-5">&ldquo;Set it up in two minutes. My first coffee came in the same day. This platform just works.&rdquo;</p>
-              <div className="flex items-center gap-3 border-t border-purple-600/20 pt-3.5">
-                <div className="w-10 h-10 bg-purple-600/10 border-2 border-purple-600/30 flex items-center justify-center text-[11px] font-black text-purple-400 shrink-0 [clip-path:polygon(0_0,calc(100%-6px)_0,100%_6px,100%_100%,0_100%)]">
-                  AK
-                </div>
-                <div>
-                  <div className="text-[13px] font-black text-[#e0e0f0] tracking-[-0.01em]">xxyx</div>
-                  <div className="text-[11px] text-[#555] uppercase tracking-[0.06em]">Indie developer</div>
-                </div>
+            <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] px-5 sm:px-7 py-5 flex items-center gap-5 transition-all duration-200 hover:-translate-y-0.5 cursor-default">
+              <div className="w-12 h-12 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center shrink-0 [clip-path:polygon(0_0,calc(100%-7px)_0,100%_7px,100%_100%,0_100%)]">
+                <img src="https://img.icons8.com/color/48/source-code.png" alt="" className="w-6 h-6 object-contain" />
+              </div>
+              <div>
+                <h3 className="font-black text-[14px] text-[#e0e0f0] tracking-[-0.01em] mb-0.5">Built with modern tools</h3>
+                <p className="text-[12px] text-[#505068] leading-[1.6]">Next.js, NextAuth, and Razorpay power a fast, secure experience end to end.</p>
               </div>
             </div>
 
-            <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-7 transition-all duration-200">
-              <p className="text-[13px] text-[#505068] leading-[1.65] mb-5">&ldquo;I just wanted a simple tip jar. This is exactly that — no nonsense, just love from my readers.&rdquo;</p>
-              <div className="flex items-center gap-3 border-t border-purple-600/20 pt-3.5">
-                <div className="w-10 h-10 bg-purple-600/10 border-2 border-purple-600/30 flex items-center justify-center text-[11px] font-black text-purple-400 shrink-0 [clip-path:polygon(0_0,calc(100%-6px)_0,100%_6px,100%_100%,0_100%)]">
-                  SR
-                </div>
-                <div>
-                  <div className="text-[13px] font-black text-[#e0e0f0] tracking-[-0.01em]">xxzz</div>
-                  <div className="text-[11px] text-[#555] uppercase tracking-[0.06em]">Fiction writer</div>
-                </div>
+            <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] px-5 sm:px-7 py-5 flex items-center gap-5 transition-all duration-200 hover:-translate-y-0.5 cursor-default">
+              <div className="w-12 h-12 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center shrink-0 [clip-path:polygon(0_0,calc(100%-7px)_0,100%_7px,100%_100%,0_100%)]">
+                <img src="https://img.icons8.com/color/48/idea.png" alt="" className="w-6 h-6 object-contain" />
+              </div>
+              <div>
+                <h3 className="font-black text-[14px] text-[#e0e0f0] tracking-[-0.01em] mb-0.5">Designed with intent</h3>
+                <p className="text-[12px] text-[#505068] leading-[1.6]">Every screen was built to stay out of your way, clean, fast, and easy to trust.</p>
               </div>
             </div>
 
-            <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-7 transition-all duration-200">
-              <p className="text-[13px] text-[#505068] leading-[1.65] mb-5">&ldquo;The messages my supporters leave make my day. GetMeACoffee feels personal in a way others don&apos;t.&rdquo;</p>
-              <div className="flex items-center gap-3 border-t border-purple-600/20 pt-3.5">
-                <div className="w-10 h-10 bg-purple-600/10 border-2 border-purple-600/30 flex items-center justify-center text-[11px] font-black text-purple-400 shrink-0 [clip-path:polygon(0_0,calc(100%-6px)_0,100%_6px,100%_100%,0_100%)]">
-                  VN
-                </div>
-                <div>
-                  <div className="text-[13px] font-black text-[#e0e0f0] tracking-[-0.01em]">zzzxx</div>
-                  <div className="text-[11px] text-[#555] uppercase tracking-[0.06em]">Music producer</div>
-                </div>
+            <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] px-5 sm:px-7 py-5 flex items-center gap-5 transition-all duration-200 hover:-translate-y-0.5 cursor-default">
+              <div className="w-12 h-12 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center shrink-0 [clip-path:polygon(0_0,calc(100%-7px)_0,100%_7px,100%_100%,0_100%)]">
+                <img src="https://img.icons8.com/color/48/github.png" alt="" className="w-6 h-6 object-contain" />
+              </div>
+              <div>
+                <h3 className="font-black text-[14px] text-[#e0e0f0] tracking-[-0.01em] mb-0.5">Open and evolving</h3>
+                <p className="text-[12px] text-[#505068] leading-[1.6]">Still growing, new features ship regularly based on what creators actually need.</p>
+              </div>
+            </div>
+
+            <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] px-5 sm:px-7 py-5 flex items-center gap-5 transition-all duration-200 hover:-translate-y-0.5 cursor-default">
+              <div className="w-12 h-12 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center shrink-0 [clip-path:polygon(0_0,calc(100%-7px)_0,100%_7px,100%_100%,0_100%)]">
+                <img src="https://img.icons8.com/color/48/handshake--v1.png" alt="" className="w-6 h-6 object-contain" />
+              </div>
+              <div>
+                <h3 className="font-black text-[14px] text-[#e0e0f0] tracking-[-0.01em] mb-0.5">Fair by default</h3>
+                <p className="text-[12px] text-[#505068] leading-[1.6]">No hidden fees, no platform cut, the value goes where it belongs, to you.</p>
               </div>
             </div>
 
