@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className='bg-black border-t-2 border-purple-600/20 text-white'>
 
-      <div className='max-w-4xl mx-auto px-6 sm:px-10 md:px-16 py-10 md:py-14'>
+      <div className='max-w-4xl mx-auto px-6 sm:px-10 md:px-2 py-10 md:py-10'>
 
         <div className='flex flex-col md:flex-row md:justify-between gap-10'>
 
@@ -61,7 +61,7 @@ const Footer = () => {
           <p className='text-[#444] text-[12px]'>
             © 2026 <a href="/" className='text-[#666] hover:text-purple-400 transition-colors'>GetMeACoffee</a>. Made for creators everywhere.
           </p>
-          <p className='text-[#333] text-[11px] uppercase tracking-widest'>Built with Next.js</p>
+          <p className='text-[#333] text-[11px] uppercase tracking-widest'>Built For The Creators</p>
         </div>
 
       </div>
