@@ -41,7 +41,19 @@ const Dashboard = () => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const data = Object.fromEntries(formData)
-        await updateProfile(JSON.stringify(data), oldusername)
+        const result = await updateProfile(JSON.stringify(data), oldusername)
+
+        if (result?.error) {
+            toast.error(result.error, {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "dark",
+                transition: Bounce,
+            });
+            return
+        }
+
+        setOldusername(data.username) // ye poorane session ko save nhi krta , updated vale ko hi krta h 
         toast('Profile Updated', {
             position: "top-right",
             autoClose: 5000,

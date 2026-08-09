@@ -46,11 +46,13 @@ export const updateProfile = async (data, oldusername) => {
     let ndata = JSON.parse(data) //parse krta h data ko string ke form me 
     if (oldusername !== ndata.username) {
         let u = await User.findOne({ username: ndata.username })
-        if (u) {
+        // only block the save if that username belongs to someone else — not if it's your own doc under your new username
+        if (u && u.email !== ndata.email) {
             return { error: "username already exists" }
         }
     }
     await User.updateOne({ email: ndata.email }, ndata)
+    return { success: true } // let the frontend know it actually worked
 }
 
 
