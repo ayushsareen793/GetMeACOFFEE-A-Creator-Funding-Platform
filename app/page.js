@@ -1,11 +1,20 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function page() {
   const { data: session } = useSession();
   const router = useRouter();
+  const [supporterUsername, setSupporterUsername] = useState("");
+
+  //function to find to your creator page 
+  const handleGoToCreator = (e) => {
+    e.preventDefault();
+    if (supporterUsername.trim()) {
+      router.push(`/${supporterUsername.trim()}`);
+    }
+  };
 
   return (
     <div className="bg-black min-h-screen text-white">
@@ -77,8 +86,17 @@ export default function page() {
         </div>
       </div>
 
+
+
+
+
       {/* divider */}
       <div className="h-px mx-6 sm:mx-10 bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
+
+
 
       {/* features section */}
       <div className="max-w-225 mx-auto px-6 sm:px-10 py-14 md:py-20">
@@ -119,8 +137,41 @@ export default function page() {
         </div>
       </div>
 
+
+
+
       {/* divider */}
       <div className="h-px mx-6 sm:mx-10 bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
+
+      {/* find a creator feature */}
+      <div className="max-w-225 mx-auto px-6 sm:px-10 py-14 md:py-20">
+        <p className="text-center text-[10px] font-black uppercase tracking-[0.18em] text-purple-600 mb-3">Already supporting someone?</p>
+        <h2 className="text-center font-black tracking-[-0.03em] text-white mb-3 text-[clamp(22px,3vw,30px)]">
+          Find a <span className="text-[#444]">creator</span>
+        </h2>
+        <p className="text-center text-[#666] text-[14px] mb-10 max-w-100 mx-auto">
+          Got a username from a creator you want to support? Enter it below to go straight to their page.
+        </p>
+
+        <form onSubmit={handleGoToCreator} className="flex flex-col sm:flex-row gap-3 max-w-125 mx-auto">
+          <input value={supporterUsername} onChange={(e) => setSupporterUsername(e.target.value)} type="text" placeholder="Enter creator's username" className="flex-1 px-4 py-3.5 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333]"/>
+          <button type="submit" className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-8 py-3.5 transition-colors border-none cursor-pointer">
+            Go to Page
+          </button>
+        </form>
+      </div>
+
+
+
+
+      {/* divider */}
+      <div className="h-px mx-6 sm:mx-10 bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
 
       {/* about us section */}
       <div className="max-w-225 mx-auto px-6 sm:px-10 py-14 md:py-20">
