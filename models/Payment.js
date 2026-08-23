@@ -12,4 +12,8 @@ const PaymentSchema= new Schema({
     done:{type: Boolean, default:false},
 });
 
+PaymentSchema.index({ to_user: 1 });
+PaymentSchema.index({ to_user: 1, done: 1, amount: -1 });
+PaymentSchema.index({ to_user: 1, done: 1, createdAt: -1 });
+
 export default mongoose.models.Payment || model("Payment",PaymentSchema);

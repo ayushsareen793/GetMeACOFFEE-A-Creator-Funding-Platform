@@ -14,4 +14,5 @@ const Userschema= new Schema({
     updatedAt:{type:Date ,default: Date.now},
 });
 
+Userschema.index({ username: 1 });
 export default mongoose.models.User || model("User",Userschema);
