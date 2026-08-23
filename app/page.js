@@ -51,6 +51,9 @@ export default function page() {
             </button>
           </div>
 
+
+          
+
           {/* Promise to creators */}
           <div className="grid grid-cols-1 sm:grid-cols-3 border-t-2 border-purple-600/20">
             <div className="pt-6 pr-6 sm:border-r-2 border-purple-600/20 pb-6 sm:pb-0">
@@ -70,6 +73,8 @@ export default function page() {
             </div>
           </div>
         </div>
+
+
 
         {/*  geometric shapes */}
         <div className="relative overflow-hidden bg-[#0d0d12] hidden md:block min-h-75">
