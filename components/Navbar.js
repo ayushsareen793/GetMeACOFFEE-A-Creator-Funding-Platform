@@ -7,8 +7,11 @@ import { ToastContainer, toast } from 'react-toastify';
 const Navbar = () => {
   const [showdropdown, setShowdropdown] = useState(false)
   const { data: session } = useSession()
-
   const dropdownRef = useRef(null)
+
+
+
+  //dropdown hat jaaega jaise hi doosri jagah click krega 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -18,6 +21,10 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
+
+
+
+
 
   return (
     <>
