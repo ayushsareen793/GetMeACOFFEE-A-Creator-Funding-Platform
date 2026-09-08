@@ -11,7 +11,6 @@ const Dashboard = () => {
     const router = useRouter()
     const [form, setform] = useState({})
     const [oldusername, setOldusername] = useState("")
-    const [copied, setCopied] = useState(false)
 
     useEffect(() => {
         if (status === "loading") return
@@ -68,21 +67,6 @@ const Dashboard = () => {
         });
     }
 
-    //  the creator's live public page URL 
-    const publicLink = typeof window !== "undefined" && form.username
-        ? `${window.location.origin}/${form.username}`
-        : ""
-
-    const handleCopyLink = async () => {
-        try {
-            await navigator.clipboard.writeText(publicLink)
-            setCopied(true)
-            setTimeout(() => setCopied(false), 2000)
-        } catch (err) {
-            toast.error("Couldn't copy link", { theme: "dark", transition: Bounce })
-        }
-    }
-
     return (
         <>
             <ToastContainer
@@ -116,21 +100,6 @@ const Dashboard = () => {
                         <span className="text-purple-400">{session?.user?.name || "Creator"}</span>
                     </h1>
                 </div>
-
-                {/* public page link copy button */}
-                {publicLink && (
-                    <div className="px-6 sm:px-10 md:px-16 pt-8 md:pt-10">
-                        <div className="max-w-225 mx-auto bg-black border-2 border-purple-600 p-4 sm:p-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
-                            <div className="flex-1 min-w-0">
-                                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-purple-400 mb-1">Your Public Page</p>
-                                <p className="text-[13px] font-medium text-[#ccc] truncate">{publicLink}</p>
-                            </div>
-                            <button type="button" onClick={handleCopyLink} className="shrink-0 bg-purple-600 hover:bg-purple-500 text-white font-bold text-[11px] uppercase tracking-[0.08em] px-5 py-3 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
-                                {copied ? "Copied!" : "Copy Link"}
-                            </button>
-                        </div>
-                    </div>
-                )}
 
                 
                 <form onSubmit={handleSubmit}>

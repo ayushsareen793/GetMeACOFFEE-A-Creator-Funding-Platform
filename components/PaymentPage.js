@@ -4,15 +4,48 @@ import { useEffect } from 'react'
 import Script from 'next/script'
 import { fetchuser, initiate, fetchpayments } from '@/actions/useractions'
 import { useSession } from 'next-auth/react'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const PaymentPage = ({ username }) => {
   const [paymentform, setpaymentform] = useState({name:"",message:"",amount:""})
   const [currentuser, setcurrentuser] = useState({})
   const [payments, setpayments] = useState([])
+  const [linkcopied, setlinkcopied] = useState(false)
+
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     getData()
   }, [username])
+
+
+  //  thank-you notification, successful payment ke baad
+  useEffect(() => {
+    if (searchParams.get('paymentdone') === 'true') {
+      toast.success("Thank you for your support!", {
+        icon: <img src="https://api.iconify.design/mdi/coffee.svg?color=%239333ea" width={18} height={18} alt="" />
+      })
+      getData() 
+      router.replace(pathname)
+    }
+  }, [searchParams])
+
+
+  //copy profile button function
+  const copyProfileLink = async () => {
+    try {
+      const link = `${window.location.origin}/${username}`
+      await navigator.clipboard.writeText(link)
+      setlinkcopied(true)
+      toast.success("Profile link copied!")
+      setTimeout(() => setlinkcopied(false), 2000)
+    } catch (err) {
+      toast.error("Couldn't copy link, please copy it manually")
+    }
+  }
 
   const handlechange = (e) => {
     setpaymentform({ ...paymentform, [e.target.name]: e.target.value })
@@ -76,7 +109,24 @@ const PaymentPage = ({ username }) => {
             Creator
           </div>
           <h1 className="font-black leading-none tracking-[-0.04em] text-[clamp(32px,7vw,60px)] mb-4">{username}</h1>
-          <p className="text-[#555] text-[13px] uppercase tracking-[0.08em] mb-10">All contributions are sent anonymously</p>
+          <p className="text-[#555] text-[13px] uppercase tracking-[0.08em] mb-6">All contributions are sent anonymously</p>
+
+          <button
+            onClick={copyProfileLink}
+            className="inline-flex items-center gap-2 bg-black border-2 border-[#9333ea]/40 hover:border-[#a855f7] hover:bg-[#0d0d18] text-[#888] hover:text-white font-bold text-[11px] uppercase tracking-[0.08em] px-5 py-2.5 mb-10 transition-colors cursor-pointer [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]"
+          >
+            {linkcopied ? (
+              <>
+                <img src="https://api.iconify.design/mdi/check-bold.svg?color=white" width={14} height={14} alt="" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <img src="https://api.iconify.design/mdi/content-copy.svg?color=%23888888" width={14} height={14} alt="" />
+                Copy Profile Link
+              </>
+            )}
+          </button>
 
 
 
@@ -133,7 +183,7 @@ const PaymentPage = ({ username }) => {
         </div>
 
        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 px-6 sm:px-10 md:px-16 py-10 md:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-start gap-6 md:gap-10 px-6 sm:px-10 md:px-16 py-10 md:py-16">
 
 
 
