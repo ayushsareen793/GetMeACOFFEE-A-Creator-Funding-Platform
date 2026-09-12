@@ -22,30 +22,26 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-
-
-
-
   return (
     <>
-      <nav className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0 px-4 sm:px-6 md:px-10 py-3 md:py-0 min-h-18 md:h-18 z-50 bg-black sticky top-0 border-b-2 border-purple-600">
+      <nav className="flex flex-row justify-between items-center gap-2 px-3 sm:px-6 md:px-10 py-0 h-16 md:h-18 z-50 bg-black sticky top-0 border-b-2 border-purple-600">
 
         {/* logo */}
-        <Link className="flex items-center gap-3 no-underline" href="/">
-          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-purple-600 flex items-center justify-center shrink-0 [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
+        <Link className="flex items-center gap-2 sm:gap-3 no-underline min-w-0 shrink-0" href="/">
+          <div className="w-8 h-8 sm:w-11 sm:h-11 bg-purple-600 flex items-center justify-center shrink-0 [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
             <img src="https://api.iconify.design/mdi/coffee.svg?color=white" width={22} height={22} alt="" />
           </div>
-          <span className="text-[17px] sm:text-[22px] font-black uppercase tracking-tight text-white whitespace-nowrap">
+          <span className="text-[14px] sm:text-[22px] font-black uppercase tracking-tight text-white whitespace-nowrap">
             GET<span className="text-purple-600">MEACOFFEE</span>
           </span>
         </Link>
 
        
-        <div className="flex items-center gap-3 relative w-full md:w-auto justify-center md:justify-end">
+        <div className="flex items-center gap-3 relative min-w-0 justify-end">
 
           {session && (
-            <div ref={dropdownRef} className="relative w-full md:w-auto flex justify-center md:justify-end">
-              <button onClick={() => setShowdropdown(!showdropdown)} className="flex items-center gap-2 bg-purple-600/10 border border-purple-600/30 hover:bg-purple-600/20 hover:border-purple-500 text-purple-400 hover:text-white text-[11px] font-bold tracking-[0.08em] px-5 py-2.5 transition-all duration-200 max-w-full">
+            <div ref={dropdownRef} className="relative min-w-0 flex justify-end">
+              <button onClick={() => setShowdropdown(!showdropdown)} className="flex items-center gap-1 sm:gap-2 bg-purple-600/10 border border-purple-600/30 hover:bg-purple-600/20 hover:border-purple-500 text-purple-400 hover:text-white text-[10px] sm:text-[11px] font-bold tracking-[0.08em] px-3 sm:px-5 py-2 sm:py-2.5 transition-all duration-200 min-w-0 max-w-[42vw] sm:max-w-full">
                 <span className="truncate">Welcome, {session.user.email}</span>
                 <svg className={`w-3 h-3 shrink-0 transition-transform duration-200 ${showdropdown ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="m6 9 6 6 6-6" />
