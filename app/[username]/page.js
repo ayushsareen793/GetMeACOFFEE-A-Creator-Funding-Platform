@@ -41,8 +41,6 @@ const Username =  async({ params }) => {
     <>
 <PaymentPage username={username}/>
     </>
-
-
   )
 }
 

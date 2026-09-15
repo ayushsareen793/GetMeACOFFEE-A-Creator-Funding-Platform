@@ -223,7 +223,7 @@ const AboutPage = () => {
       {/* divider */}
       <div className="h-px mx-6 sm:mx-10 bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
 
-      {/* replaced testimonials with this since i dont have real users yet */}
+     
       {/* TO do after users: swap this out once i actually have creators using the platform */}
       <div className="max-w-225 mx-auto px-6 sm:px-10 py-14 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-17 items-start">

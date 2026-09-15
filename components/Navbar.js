@@ -26,6 +26,7 @@ const Navbar = () => {
     <>
       <nav className="flex flex-row justify-between items-center gap-2 px-3 sm:px-6 md:px-10 py-0 h-16 md:h-18 z-50 bg-black sticky top-0 border-b-2 border-purple-600">
 
+
         {/* logo */}
         <Link className="flex items-center gap-2 sm:gap-3 no-underline min-w-0 shrink-0" href="/">
           <div className="w-8 h-8 sm:w-11 sm:h-11 bg-purple-600 flex items-center justify-center shrink-0 [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">
@@ -47,6 +48,7 @@ const Navbar = () => {
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </button>
+
 
               {/* Dropdown */}
               <div className={`absolute right-0 md:right-0 top-[calc(100%+8px)] w-48 border border-purple-600/30 bg-black shadow-[0_20px_60px_rgba(147,51,234,0.15)] z-999 p-1.5 [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)] ${showdropdown ? "block" : "hidden"}`}>
@@ -82,6 +84,7 @@ const Navbar = () => {
               </div>
             </div>
           )}
+          
 
           {!session && (
             <Link href="/Login">
