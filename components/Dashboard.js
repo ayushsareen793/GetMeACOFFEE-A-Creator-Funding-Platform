@@ -15,7 +15,7 @@ const Dashboard = () => {
     useEffect(() => {
         if (status === "loading") return
         if (status === "unauthenticated") {
-            router.push('/login')
+            router.push('/Login')
             return
         }
         if (session?.user?.name) {
