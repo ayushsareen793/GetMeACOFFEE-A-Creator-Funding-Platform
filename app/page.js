@@ -178,30 +178,78 @@ export default function page() {
 
 
 
-      {/* about us section */}
-      <div className="max-w-225 mx-auto px-6 sm:px-10 py-14 md:py-20">
-        <p className="text-center text-[10px] font-black uppercase tracking-[0.18em] text-purple-600 mb-3">About us</p>
+      {/* FAQ section */}
+      <div className="max-w-300 mx-auto px-6 sm:px-10 py-14 md:py-20">
+        <p className="text-center text-[10px] font-black uppercase tracking-[0.18em] text-purple-600 mb-3">Got questions?</p>
         <h2 className="text-center font-black tracking-[-0.03em] text-white mb-12 text-[clamp(22px,3vw,30px)]">
-          Know more <span className="text-[#444]">about us</span>
+          Frequently asked <span className="text-[#444]">questions</span>
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-17">
-          <div>
-            <div className="inline-flex items-center bg-[#6c63ff]/10 border border-[#6c63ff]/25 text-purple-400 text-[11px] font-black px-3 py-1.25 uppercase tracking-[0.08em] mb-5 rounded-sm">
-              Our mission
-            </div>
-            <p className="text-[#666] text-[15px] leading-[1.85] mb-5">
-              Our platform is built to empower creators by giving them a simple and reliable way to receive support from their audience. We believe every creator deserves recognition and the opportunity to grow.
-            </p>
-            <p className="text-[#666] text-[15px] leading-[1.85]">
-              With seamless payments and secure transactions, we bridge the gap between creators and their supporters, building a strong and supportive community.
-            </p>
-          </div>
+        <div className="max-w-250 mx-auto flex flex-col gap-3">
 
-          <div className="overflow-hidden border-2 border-purple-600 rounded-sm shadow-[0_0_40px_rgba(147,51,234,0.2)]">
-            <iframe width="100%" height="280" src="https://www.youtube.com/embed/6w6ndoe3UH4?si=C3Ix55y9rJt4Zhtz" title="YouTube video player"  frameBorder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
-          </div>
+          <details className="group border-2 border-purple-600/40 bg-black">
+            <summary className="flex items-center justify-between px-6 py-4 text-white font-bold text-[14px] tracking-[-0.01em] cursor-pointer list-none">
+              Is it free to sign up?
+              <span className="text-purple-400 text-[18px] transition-transform duration-200 group-open:rotate-45">+</span>
+            </summary>
+            <p className="px-6 pb-5 text-[#888] text-[13px] leading-[1.7]">
+              Yes, creating an account and setting up your page is completely free.
+            </p>
+          </details>
+
+          <details className="group border-2 border-purple-600/40 bg-black">
+            <summary className="flex items-center justify-between px-6 py-4 text-white font-bold text-[14px] tracking-[-0.01em] cursor-pointer list-none">
+              Do you take a cut from support?
+              <span className="text-purple-400 text-[18px] transition-transform duration-200 group-open:rotate-45">+</span>
+            </summary>
+            <p className="px-6 pb-5 text-[#888] text-[13px] leading-[1.7]">
+              No, every rupee your fans send goes directly to you , no platform fees.
+            </p>
+          </details>
+
+          <details className="group border-2 border-purple-600/40 bg-black">
+            <summary className="flex items-center justify-between px-6 py-4 text-white font-bold text-[14px] tracking-[-0.01em] cursor-pointer list-none">
+              How fast do I get paid?
+              <span className="text-purple-400 text-[18px] transition-transform duration-200 group-open:rotate-45">+</span>
+            </summary>
+            <p className="px-6 pb-5 text-[#888] text-[13px] leading-[1.7]">
+              Payments are processed instantly and reflect in your dashboard right away.
+            </p>
+          </details>
+
+          <details className="group border-2 border-purple-600/40 bg-black">
+            <summary className="flex items-center justify-between px-6 py-4 text-white font-bold text-[14px] tracking-[-0.01em] cursor-pointer list-none">
+              Can supporters stay anonymous?
+              <span className="text-purple-400 text-[18px] transition-transform duration-200 group-open:rotate-45">+</span>
+            </summary>
+            <p className="px-6 pb-5 text-[#888] text-[13px] leading-[1.7]">
+              Yes, supporters can choose to leave a message and contribution without revealing their identity.
+            </p>
+          </details>
+
         </div>
+      </div>
+
+
+
+
+      {/* divider */}
+      <div className="h-px mx-6 sm:mx-10 bg-linear-to-r from-transparent via-white/[0.07] to-transparent" />
+
+
+
+
+      {/* final CTA banner */}
+      <div className="max-w-325 mx-auto px-6 sm:px-10 py-16 md:py-24 text-center">
+        <h2 className="font-black leading-[0.95] tracking-[-0.03em] mb-6 text-[clamp(28px,5vw,56px)] text-white">
+          Ready to get <span className="text-purple-400">funded?</span>
+        </h2>
+        <p className="text-[#888] text-[15px] leading-[1.7] mb-8 max-w-100 mx-auto">
+          Join creators already earning support from fans who believe in their work.
+        </p>
+        <button onClick={() => (session ? router.push("/dashboard") : router.push("/Login"))} className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-10 py-4.5 transition-colors border-none cursor-pointer">
+          Start Here
+        </button>
       </div>
 
     </div>

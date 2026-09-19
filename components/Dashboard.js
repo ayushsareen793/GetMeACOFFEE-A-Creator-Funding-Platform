@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 import { fetchuser, updateProfile } from '@/actions/useractions'
-import { ToastContainer, toast } from 'react-toastify';
-import { Bounce } from 'react-toastify';
+import { ToastContainer, toast , Bounce } from 'react-toastify';
 
 const Dashboard = () => {
     const { data: session, status, update } = useSession()
