@@ -8,10 +8,12 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 const PaymentPage = ({ username }) => {
-  const [paymentform, setpaymentform] = useState({name:"",message:"",amount:""})
+  const [paymentform, setpaymentform] = useState({ name: "", message: "", amount: "" })
   const [currentuser, setcurrentuser] = useState({})
   const [payments, setpayments] = useState([])
   const [linkcopied, setlinkcopied] = useState(false)
+  const [loading, setloading] = useState(true)
+  const [notfound, setnotfound] = useState(false)
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -28,7 +30,7 @@ const PaymentPage = ({ username }) => {
       toast.success("Thank you for your support!", {
         icon: <img src="https://api.iconify.design/mdi/coffee.svg?color=%239333ea" width={18} height={18} alt="" />
       })
-      getData() 
+      getData()
       router.replace(pathname)
     }
   }, [searchParams])
@@ -53,16 +55,28 @@ const PaymentPage = ({ username }) => {
 
   //to fetch username
   const getData = async (params) => {
-    let u = await fetchuser(username)
+    setloading(true)
+    let u = await fetchuser(username);
+    if (!u) {
+      setnotfound(true)
+      setloading(false)
+      return
+    }
+
+    setnotfound(false)
     setcurrentuser(u)
     let dbpayments = await fetchpayments(username)
     setpayments(dbpayments)
+    setloading(false)
 
     console.log(u, dbpayments);
   }
 
+
+
   // to count the number of supporters
   const supporterCount = new Set(payments.map(p => p.name)).size
+
 
   //function for razorpay payment
   const pay = async (amount) => {
@@ -85,9 +99,36 @@ const PaymentPage = ({ username }) => {
     rzp1.open();
   }
 
+
+
+  //if creator not found then display this 
+  if (notfound) {
+    return (
+      <div className="bg-black min-h-screen text-white flex flex-col items-center justify-center px-6 text-center">
+        <div className="inline-flex items-center gap-2 bg-[#9333ea]/10 border border-[#9333ea]/25 text-[#a855f7] text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 mb-6">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#9333ea]" />
+          Not Found
+        </div>
+        <h1 className="font-black leading-none tracking-[-0.04em] text-[clamp(28px,6vw,48px)] mb-4">
+          No creator found
+        </h1>
+        <p className="text-[#666] text-[14px] mb-10 max-w-100">
+          There's no creator with the username <span className="text-[#a855f7] font-bold">@{username}</span>. Double-check the spelling and try again.
+        </p>
+        <button onClick={() => router.push("/")} className="bg-[#9333ea] hover:bg-[#a855f7] text-white font-bold text-[12px] uppercase tracking-[0.08em] px-8 py-3.5 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
+          Back to Home
+        </button>
+      </div>
+    )
+  }
+
+  if (loading) {
+    return <div className="bg-black min-h-screen" />
+  }
+
   return (
     <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js"/>
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
       <div className="bg-black min-h-screen text-white">
 
@@ -97,7 +138,7 @@ const PaymentPage = ({ username }) => {
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black" />
           <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2">
             <div className="border-4 border-[#9333ea] bg-black [clip-path:polygon(0_0,calc(100%-12px)_0,100%_12px,100%_100%,0_100%)]">
-              <img width={120} height={120} src={currentuser?.profilepic} alt="" className="block w-20 h-20 sm:w-28 sm:h-28 md:w-30 md:h-30"/>
+              <img width={120} height={120} src={currentuser?.profilepic} alt="" className="block w-20 h-20 sm:w-28 sm:h-28 md:w-30 md:h-30" />
             </div>
           </div>
         </div>
@@ -111,10 +152,7 @@ const PaymentPage = ({ username }) => {
           <h1 className="font-black leading-none tracking-[-0.04em] text-[clamp(32px,7vw,60px)] mb-4">{username}</h1>
           <p className="text-[#555] text-[13px] uppercase tracking-[0.08em] mb-6">All contributions are sent anonymously</p>
 
-          <button
-            onClick={copyProfileLink}
-            className="inline-flex items-center gap-2 bg-black border-2 border-[#9333ea]/40 hover:border-[#a855f7] hover:bg-[#0d0d18] text-[#888] hover:text-white font-bold text-[11px] uppercase tracking-[0.08em] px-5 py-2.5 mb-10 transition-colors cursor-pointer [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]"
-          >
+          <button onClick={copyProfileLink} className="inline-flex items-center gap-2 bg-black border-2 border-[#9333ea]/40 hover:border-[#a855f7] hover:bg-[#0d0d18] text-[#888] hover:text-white font-bold text-[11px] uppercase tracking-[0.08em] px-5 py-2.5 mb-10 transition-colors cursor-pointer [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
             {linkcopied ? (
               <>
                 <img src="https://api.iconify.design/mdi/check-bold.svg?color=white" width={14} height={14} alt="" />
@@ -137,7 +175,7 @@ const PaymentPage = ({ username }) => {
               <div className="text-[10px] sm:text-[11px] text-[#555] uppercase tracking-[0.08em] mt-1">Supporters</div>
             </div>
             <div className="pt-6 px-3 sm:px-10 border-r-2 border-[#9333ea]/20">
-              <div className="text-[20px] sm:text-[28px] font-black tracking-[-0.03em] leading-none text-white">₹{payments.reduce((a,b)=>a+b.amount,0)}</div>
+              <div className="text-[20px] sm:text-[28px] font-black tracking-[-0.03em] leading-none text-white">₹{payments.reduce((a, b) => a + b.amount, 0)}</div>
               <div className="text-[10px] sm:text-[11px] text-[#555] uppercase tracking-[0.08em] mt-1">Funds Raised</div>
             </div>
             <div className="pt-6 pl-3 sm:pl-10">
@@ -153,11 +191,11 @@ const PaymentPage = ({ username }) => {
         <div className="px-6 sm:px-10 md:px-16 py-10 md:py-16 border-b-2 border-[#9333ea]/20">
           <div className="relative max-w-4xl mx-auto bg-black border-2 border-[#9333ea] p-8 sm:p-12 overflow-hidden [clip-path:polygon(0_0,calc(100%-20px)_0,100%_20px,100%_100%,0_100%)]">
 
-            
+
             <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-[#9333ea]/25 pointer-events-none hidden sm:block" />
             <div className="absolute bottom-6 left-6 w-10 h-10 border-b-2 border-l-2 border-[#9333ea]/15 pointer-events-none hidden sm:block" />
 
-           
+
             <div className="absolute -top-4 left-4 sm:left-8 text-[100px] sm:text-[140px] leading-none font-black text-[#9333ea]/10 select-none pointer-events-none">
               &ldquo;
             </div>
@@ -182,7 +220,7 @@ const PaymentPage = ({ username }) => {
           </div>
         </div>
 
-       
+
         <div className="grid grid-cols-1 lg:grid-cols-2 items-start gap-6 md:gap-10 px-6 sm:px-10 md:px-16 py-10 md:py-16">
 
 
@@ -239,7 +277,7 @@ const PaymentPage = ({ username }) => {
                 <button onClick={() => pay(3000)} className="flex-1 sm:flex-none bg-black border-2 border-[#9333ea]/40 hover:border-[#a855f7] hover:bg-[#0d0d18] text-[#888] hover:text-white font-bold text-[12px] uppercase tracking-[0.08em] px-4 sm:px-6 py-2.5 transition-colors cursor-pointer [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">Pay ₹30</button>
               </div>
 
-              <button onClick={() => pay(Number.parseInt(paymentform.amount * 100))} type="button" disabled={paymentform.name?.length<3 || paymentform.message?.length<4 || paymentform.amount?.length<1} className="w-full bg-[#9333ea] hover:bg-[#a855f7] disabled:opacity-30 disabled:cursor-not-allowed text-white font-bold text-[12px] uppercase tracking-[0.08em] py-4 mt-1 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">Pay Now</button>
+              <button onClick={() => pay(Number.parseInt(paymentform.amount * 100))} type="button" disabled={paymentform.name?.length < 3 || paymentform.message?.length < 4 || paymentform.amount?.length < 1} className="w-full bg-[#9333ea] hover:bg-[#a855f7] disabled:opacity-30 disabled:cursor-not-allowed text-white font-bold text-[12px] uppercase tracking-[0.08em] py-4 mt-1 transition-colors border-none cursor-pointer [clip-path:polygon(0_0,calc(100%-10px)_0,100%_10px,100%_100%,0_100%)]">Pay Now</button>
             </div>
           </div>
 

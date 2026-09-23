@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 import { fetchuser, updateProfile } from '@/actions/useractions'
-import { ToastContainer, toast , Bounce } from 'react-toastify';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
 
 const Dashboard = () => {
     const { data: session, status, update } = useSession()
@@ -36,11 +36,25 @@ const Dashboard = () => {
         setform({ ...form, [e.target.name]: e.target.value })
     }
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const data = Object.fromEntries(formData)
-        const result = await updateProfile(JSON.stringify(data), oldusername)
+
+        let result;
+        try {
+           result = await updateProfile(JSON.stringify(data), oldusername)
+        } catch (err) {
+            console.error("updateProfile failed:", err)
+            toast.error("Something went wrong saving your profile. Please try again.", {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "dark",
+                transition: Bounce,
+            })
+            return
+        }
 
         if (result?.error) {
             toast.error(result.error, {
@@ -96,11 +110,11 @@ const Dashboard = () => {
 
                     <h1 className="font-black leading-[0.92] tracking-[-0.04em] text-[clamp(32px,5vw,64px)]">
                         Welcome back,<br />
-                        <span className="text-purple-400">{session?.user?.name || "Creator"}</span>
+                        <span className="text-purple-400">{session?.user.name || "Creator"}</span>
                     </h1>
                 </div>
 
-                
+
                 <form onSubmit={handleSubmit}>
                     <div className="max-w-225 mx-auto px-6 sm:px-10 md:px-16 py-10 md:py-16 flex flex-col gap-12 md:gap-16">
 
@@ -129,7 +143,7 @@ const Dashboard = () => {
                                         <div>
                                             <label htmlFor="name" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Name</label>
                                             <input value={form.name || ""} onChange={handleChange} type="text" name="name" id="name"
-                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors"/>
+                                                className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors" />
                                         </div>
                                         <div>
                                             <label htmlFor="username" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Username</label>
@@ -260,7 +274,7 @@ const Dashboard = () => {
                             <div className="bg-black border-2 border-purple-600 p-5 sm:p-8">
                                 <div className="flex flex-col gap-2">
                                     <label htmlFor="bio" className="block mb-2 text-[11px] font-black uppercase tracking-widest text-[#555]">Bio</label>
-                                    <textarea value={form.bio || ""} onChange={handleChange} name="bio" id="bio" rows={5} maxLength={500} placeholder="I make weekly coding tutorials on full-stack web dev, plus the occasional live debugging stream..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] resize-none"/>
+                                    <textarea value={form.bio || ""} onChange={handleChange} name="bio" id="bio" rows={5} maxLength={500} placeholder="I make weekly coding tutorials on full-stack web dev, plus the occasional live debugging stream..." className="block w-full px-4 py-3 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333] resize-none" />
                                     <p className="text-[11px] text-[#444] text-right">{(form.bio || "").length}/500</p>
                                 </div>
                             </div>

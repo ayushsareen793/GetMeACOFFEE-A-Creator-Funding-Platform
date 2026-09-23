@@ -2,17 +2,31 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { fetchuser } from "@/actions/useractions";
 
 export default function page() {
   const { data: session } = useSession();
   const router = useRouter();
   const [supporterUsername, setSupporterUsername] = useState("");
+  const [checking, setChecking] = useState(false);
+  const [searchError, setSearchError] = useState("");
 
   //function to find to your creator page 
-  const handleGoToCreator = (e) => {
+  const handleGoToCreator = async (e) => {
     e.preventDefault();
-    if (supporterUsername.trim()) {
-      router.push(`/${supporterUsername.trim()}`);
+    const uname = supporterUsername.trim();
+    if (!uname) {
+      return;
+    }
+    setSearchError("");
+    setChecking(true);
+    const user = await fetchuser(uname);
+    setChecking(false);
+
+    if (user) {
+      router.push(`/${uname}`);
+    } else {
+      setSearchError(`No creator found with the username "${uname}"`);
     }
   };
 
@@ -21,7 +35,7 @@ export default function page() {
 
       <div className="bg-black grid grid-cols-1 md:grid-cols-2 min-h-screen overflow-hidden">
 
-        
+
         <div className="flex flex-col justify-center px-6 sm:px-10 md:px-16 py-12 md:py-20 relative z-10">
 
           {/* badge */}
@@ -52,7 +66,7 @@ export default function page() {
           </div>
 
 
-          
+
 
           {/* Promise to creators */}
           <div className="grid grid-cols-1 sm:grid-cols-3 border-t-2 border-purple-600/20">
@@ -162,11 +176,14 @@ export default function page() {
         </p>
 
         <form onSubmit={handleGoToCreator} className="flex flex-col sm:flex-row gap-3 max-w-125 mx-auto">
-          <input value={supporterUsername} onChange={(e) => setSupporterUsername(e.target.value)} type="text" placeholder="Enter creator's username" className="flex-1 px-4 py-3.5 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333]"/>
-          <button type="submit" className="bg-purple-600 hover:bg-purple-500 text-white font-bold text-[12px] uppercase tracking-[0.08em] px-8 py-3.5 transition-colors border-none cursor-pointer">
-            Go to Page
+          <input value={supporterUsername} onChange={(e) => { setSupporterUsername(e.target.value); if (searchError) setSearchError(""); }} type="text" placeholder="Enter creator's username" className="flex-1 px-4 py-3.5 text-[13px] font-medium text-white bg-black border-2 border-purple-600/40 focus:border-purple-500 focus:outline-none transition-colors placeholder:text-[#333]"/>
+          <button type="submit" disabled={checking} className="bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-[12px] uppercase tracking-[0.08em] px-8 py-3.5 transition-colors border-none cursor-pointer">
+            {checking ? "Checking..." : "Go to Page"}
           </button>
         </form>
+        {searchError && (
+          <p className="text-center text-red-400 text-[13px] mt-4">{searchError}</p>
+        )}
       </div>
 
 

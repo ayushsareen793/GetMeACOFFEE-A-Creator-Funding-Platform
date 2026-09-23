@@ -34,7 +34,7 @@ export const fetchpayments = async (username) => {
         ...payment,
         _id: payment._id?.toString(),
         to_user: payment.to_user?.toString(),
-        createdAt: payment.createdAt?.toISOString(),// string ke form me pass ho rha h
+        createdAt: payment.createdAt?.toISOString(),
         updatedAT: payment.updatedAT?.toISOString(),
     }))
     return p
@@ -42,16 +42,25 @@ export const fetchpayments = async (username) => {
 
 export const updateProfile = async (data, oldusername) => {
     await connectDB()
-    let ndata = JSON.parse(data) //parse krta h data ko string ke form me 
+    let ndata = JSON.parse(data)
+
+    if (!ndata.username || !ndata.username.trim()) {
+        return { error: "Username cannot be empty" }
+    }
+
     if (oldusername !== ndata.username) {
         let u = await User.findOne({ username: ndata.username })
-        // only block the save if that username belongs to someone else — not if it's your own doc under your new username
         if (u && u.email !== ndata.email) {
             return { error: "username already exists" }
         }
     }
-    await User.updateOne({ email: ndata.email }, ndata)
-    return { success: true } // let the frontend know it actually worked
+
+    const result = await User.updateOne({ email: ndata.email }, { $set: ndata })
+    if (result.matchedCount === 0) {
+        return { error: "Could not find your account to update — try logging out and back in." }
+    }
+
+    return { success: true }
 }
 
 
@@ -61,8 +70,7 @@ export const updateProfile = async (data, oldusername) => {
 // initiate → Someone wants to send you money. This creates a payment order with Razorpay, and saves a "pending payment" entry in the database. Then it gives the frontend what it needs to show the actual payment popup.
 // fetchuser → Someone visits your profile page. This goes and fetches your user info from the database so the page can show your name, photo, etc.
 // fetchpayments → This fetches your top 10 highest payments received, so they can be shown on your page (like "top supporters").
-// updateProfile → You edited your profile (name, username, etc.) and hit save. This checks if your new username is free, and if yes, updates your info in the database.
-
+// updateProfile → You edited your profile (name, username, etc.) and hit save. This checks if your new username is free, and if yes, updates your info in the database with $set (so it actually writes), and confirms a document was really found and changed.
 
 // This file = the part of your code that talks to the database.
 // Your frontend (the page someone sees and clicks buttons on) can't directly touch the database — that would be unsafe, and also Next.js doesn't let it work that way. So whenever your frontend needs to save something or get something, it calls one of these functions, and these functions do the actual work with the database.
