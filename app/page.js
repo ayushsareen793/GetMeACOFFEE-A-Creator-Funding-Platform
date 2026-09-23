@@ -11,7 +11,7 @@ export default function page() {
   const [checking, setChecking] = useState(false);
   const [searchError, setSearchError] = useState("");
 
-  //function to find to your creator page 
+  //function to find to your creator page : it searches from the database if the creator has created the profile , if he is a creator on this profile then it redirect to the profile of the creator  
   const handleGoToCreator = async (e) => {
     e.preventDefault();
     const uname = supporterUsername.trim();

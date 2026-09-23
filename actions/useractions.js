@@ -43,23 +43,19 @@ export const fetchpayments = async (username) => {
 export const updateProfile = async (data, oldusername) => {
     await connectDB()
     let ndata = JSON.parse(data)
-
     if (!ndata.username || !ndata.username.trim()) {
         return { error: "Username cannot be empty" }
     }
-
     if (oldusername !== ndata.username) {
         let u = await User.findOne({ username: ndata.username })
         if (u && u.email !== ndata.email) {
             return { error: "username already exists" }
         }
     }
-
     const result = await User.updateOne({ email: ndata.email }, { $set: ndata })
     if (result.matchedCount === 0) {
         return { error: "Could not find your account to update — try logging out and back in." }
     }
-
     return { success: true }
 }
 
