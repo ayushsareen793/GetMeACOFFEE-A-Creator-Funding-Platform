@@ -53,8 +53,6 @@ Built entirely with the Next.js App Router, secured with NextAuth, powered by Ra
 
 | Metric | Value |
 |---|---|
-| **Commits** | 18 |
-| **Stars / Forks** | 1 / 0 |
 | **Deployment** | Live on Vercel with continuous deployment from GitHub |
 | **OAuth providers** | 2 (GitHub, Google) |
 | **Database models** | 2 (User, Payment) |
@@ -66,7 +64,7 @@ Built entirely with the Next.js App Router, secured with NextAuth, powered by Ra
 | **Top supporters shown** | Top 10 highest payments per creator |
 | **User lookup speed-up** | 81% faster (27 ms → 5 ms) |
 | **Load-test dataset** | 5,000 seeded payment records |
-| **Platform fee** | 0% |
+
 
 ---
 
