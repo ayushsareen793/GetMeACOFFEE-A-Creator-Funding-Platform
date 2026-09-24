@@ -36,7 +36,7 @@ Built entirely with the Next.js App Router, secured with NextAuth, powered by Ra
 
 | Layer | Technology |
 |---|---|
-| **Framework** | [Next.js 16](https://nextjs.org/) (App Router) |
+| **Framework** | [Next.js 14](https://nextjs.org/) (App Router) |
 | **UI Library** | [React 19](https://react.dev/) |
 | **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) |
 | **Authentication** | [NextAuth.js](https://next-auth.js.org/) (GitHub & Google OAuth providers) |
@@ -193,7 +193,7 @@ To deploy your own copy, import the repo into Vercel and add the same environmen
 
 ## 👤 Author
 
-**Piyush**
+**Ayush Sareen**
 - GitHub: [@ayushsareen793](https://github.com/ayushsareen793)
 
 ---
