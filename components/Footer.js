@@ -46,7 +46,7 @@ const Footer = () => {
                 className='w-8 h-8 bg-white/5 border border-white/10 hover:border-purple-500 hover:bg-purple-600/20 flex items-center justify-center transition-colors'>
                 <img src="https://img.icons8.com/color/48/gmail-new.png" alt="Email" width={20} height={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.linkedin.com/in/ayush-sareen-792283255" target="_blank" rel="noopener noreferrer"
                 className='w-8 h-8 bg-white/5 border border-white/10 hover:border-purple-500 hover:bg-purple-600/20 flex items-center justify-center transition-colors'>
                 <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn" width={20} height={20} />
               </a>

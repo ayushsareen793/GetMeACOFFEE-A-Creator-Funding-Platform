@@ -96,6 +96,12 @@ const PaymentPage = ({ username }) => {
       "theme": { "color": "#3399cc" }
     }
     var rzp1 = new Razorpay(options);
+
+    // Razorpay's own client-side event - fires instantly in the browser the moment  a payment is declined, before any server/webhook round-trip. This is what powers the "Payment failed" toast - the webhook is a separate, server-side confirmation and has no way to talk back to this specific browser tab.
+    rzp1.on('payment.failed', function (response) {
+      toast.error(response.error.description || "Payment failed. Please try again.")
+    })
+
     rzp1.open();
   }
 
