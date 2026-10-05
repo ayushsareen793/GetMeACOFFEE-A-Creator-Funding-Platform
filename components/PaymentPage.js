@@ -84,13 +84,34 @@ const PaymentPage = ({ username }) => {
 
   //function for razorpay payment
   const pay = async (amount) => {
-    // creator has not connected razorpay yet, so a payment can't be created
+    // agr creator ne razorpay connect nhi kiya h to payment nhi ho paaegi
     if (!currentuser?.razorpayid) {
-      toast.error("This creator hasn't connected payments yet.")
+      toast.error("This creator hasn't connected payments yet.");
       return
     }
 
-    let a = await initiate(amount, username, paymentform)
+    // initiate can throw (network/server problem), so catch it instead of leaving an unhandled rejection
+    let a ;
+    try {
+      a = await initiate(amount, username, paymentform)
+    } catch (err) {
+      console.error("initiate failed:", err)
+      toast.error("Couldn't start the payment. Please try again.")
+      return
+    }
+
+    //if the amount or payment is rejected then show this toast
+    if (a?.error) {
+      toast.error(a.error)
+      return
+    }
+
+    //  no order id means Razorpay can't open , yeh ek safety check h 
+    if (!a?.id) {
+      toast.error("Couldn't create the payment order. Please try again.")
+      return
+    }
+
     let orderID = a.id
     var options = {
       "key": process.env.NEXT_PUBLIC_KEY_ID,

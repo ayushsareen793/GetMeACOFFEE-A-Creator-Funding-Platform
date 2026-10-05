@@ -1,5 +1,6 @@
 "use server"
 import Razorpay from "razorpay"
+import { getServerSession } from "next-auth"
 import Payment from "@/models/Payment"
 import connectDB from "@/db/connectDb"
 import User from "@/models/User"
@@ -42,22 +43,59 @@ export const fetchpayments = async (username) => {
     return p
 }
 
+// oldusername is still accepted (the dashboard passes it) but the real current username is read from the database, so the browser can't fake it
 export const updateProfile = async (data, oldusername) => {
+    // khali loggedin creators hi update kr skte h 
+    const session = await getServerSession()
+    if (!session?.user?.email) {
+        return { error: "You must be logged in to update your profile." }
+    }
+    const email = session.user.email
+
     await connectDB()
     let ndata = JSON.parse(data)
     if (!ndata.username || !ndata.username.trim()) {
         return { error: "Username cannot be empty" }
     }
-    if (oldusername !== ndata.username) {
-        let u = await User.findOne({ username: ndata.username })
-        if (u && u.email !== ndata.email) {
+    const newUsername = ndata.username.trim()
+
+    const current = await User.findOne({ email })
+    if (!current) {
+        return { error: "Could not find your account to update — try logging out and back in." }
+    }
+
+    if (current.username !== newUsername) {
+        let u = await User.findOne({ username: newUsername })
+        if (u && u.email !== email) {
             return { error: "username already exists" }
         }
     }
-    const result = await User.updateOne({ email: ndata.email }, { $set: ndata })
+
+    // only these fields can be changed, so nobody can slip extra fields (or another email) into the update
+    const update = {
+        name: ndata.name,
+        username: newUsername,
+        profilepic: ndata.profilepic,
+        coverpic: ndata.coverpic,
+        bio: typeof ndata.bio === "string" ? ndata.bio.slice(0, 500) : ndata.bio,
+        razorpayid: ndata.razorpayid,
+        updatedAt: new Date(),
+    }
+    // the dashboard never receives the saved secret, so an empty box means "unchanged", not "erase it"
+    if (typeof ndata.razorpaysecret === "string" && ndata.razorpaysecret.trim() !== "") {
+        update.razorpaysecret = ndata.razorpaysecret
+    }
+
+    const result = await User.updateOne({ email }, { $set: update })
     if (result.matchedCount === 0) {
         return { error: "Could not find your account to update — try logging out and back in." }
     }
+
+    // payments are stored by username, so move them to the new username or the supporters list goes empty
+    if (current.username !== newUsername) {
+        await Payment.updateMany({ to_user: current.username }, { $set: { to_user: newUsername } })
+    }
+
     return { success: true }
 }
 
