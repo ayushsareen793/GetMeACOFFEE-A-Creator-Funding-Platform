@@ -54,22 +54,26 @@ const PaymentPage = ({ username }) => {
   }
 
   //to fetch username
-  const getData = async (params) => {
+  const getData = async () => {
     setloading(true)
-    let u = await fetchuser(username);
-    if (!u) {
+    try {
+      let u = await fetchuser(username)
+      if (!u) {
+        setnotfound(true)
+        return
+      }
+
+      setnotfound(false)
+      setcurrentuser(u)
+      let dbpayments = await fetchpayments(username)
+      setpayments(dbpayments || [])
+    } catch (err) {
+      // if anything throws, stop the loading state so the page never stays blank
+      console.error("getData failed:", err)
       setnotfound(true)
+    } finally {
       setloading(false)
-      return
     }
-
-    setnotfound(false)
-    setcurrentuser(u)
-    let dbpayments = await fetchpayments(username)
-    setpayments(dbpayments)
-    setloading(false)
-
-    console.log(u, dbpayments);
   }
 
 
@@ -80,6 +84,12 @@ const PaymentPage = ({ username }) => {
 
   //function for razorpay payment
   const pay = async (amount) => {
+    // creator has not connected razorpay yet, so a payment can't be created
+    if (!currentuser?.razorpayid) {
+      toast.error("This creator hasn't connected payments yet.")
+      return
+    }
+
     let a = await initiate(amount, username, paymentform)
     let orderID = a.id
     var options = {
@@ -140,14 +150,24 @@ const PaymentPage = ({ username }) => {
 
         {/* Cover and Profile  */}
         <div className="relative w-full">
-          <img className="object-cover w-full h-48 sm:h-64 md:h-80" src={currentuser?.coverpic} />
+          {currentuser?.coverpic ? (
+            <img className="object-cover w-full h-48 sm:h-64 md:h-80" src={currentuser.coverpic} alt="" />
+          ) : (
+            <div className="w-full h-48 sm:h-64 md:h-80 bg-linear-to-br from-purple-900/40 to-black" />
+          )}
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black" />
           <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2">
             <div className="border-4 border-[#9333ea] bg-black [clip-path:polygon(0_0,calc(100%-12px)_0,100%_12px,100%_100%,0_100%)]">
-              <img width={120} height={120} src={currentuser?.profilepic} alt="" className="block w-20 h-20 sm:w-28 sm:h-28 md:w-30 md:h-30" />
+              {currentuser?.profilepic ? (
+                <img width={120} height={120} src={currentuser.profilepic} alt="" className="block w-20 h-20 sm:w-28 sm:h-28 md:w-30 md:h-30" />
+              ) : (
+                <div className="flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 md:w-30 md:h-30 bg-purple-900/30 text-purple-400 font-black text-4xl uppercase">{username.slice(0, 1)}</div>
+              )}
             </div>
           </div>
         </div>
+
+
 
         {/*creator name  */}
         <div className="flex flex-col items-center text-center pt-16 sm:pt-20 pb-12 px-6 sm:px-10 md:px-16 border-b-2 border-[#9333ea]/20">
@@ -174,6 +194,8 @@ const PaymentPage = ({ username }) => {
 
 
 
+
+
           {/* Stats */}
           <div className="grid grid-cols-3 border-t-2 border-[#9333ea]/20 w-full max-w-md sm:max-w-none sm:w-auto">
             <div className="pt-6 pr-3 sm:pr-10 border-r-2 border-[#9333ea]/20">
@@ -190,6 +212,8 @@ const PaymentPage = ({ username }) => {
             </div>
           </div>
         </div>
+
+
 
 
 
