@@ -10,7 +10,7 @@ const Login = () => {
 
   useEffect(() => {
     if (session) {
-      router.push("/")
+      router.push("/dashboard")
     }
   }, [session])
 
@@ -86,11 +86,11 @@ const Login = () => {
 
         {/* Social buttons */}
         <div className="flex flex-col gap-3 mb-8">
-          <button onClick={()=>{signIn("google")}} className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer">
+          <button onClick={() => { signIn("google", { callbackUrl: "/dashboard" }) }} className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer">
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="h-4 w-4" />
             Continue with Google
           </button>
-          <button onClick={() => { signIn("github") }} className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer">
+          <button onClick={() => { signIn("github", { callbackUrl: "/dashboard" }) }} className="flex items-center justify-center gap-3 bg-black border-2 border-purple-600/50 hover:border-purple-500 hover:bg-[#0d0d18] text-white text-[13px] font-bold uppercase tracking-[0.06em] px-6 py-3.5 transition-all duration-200 cursor-pointer">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" className="h-4 w-4" />
             Continue with GitHub
           </button>

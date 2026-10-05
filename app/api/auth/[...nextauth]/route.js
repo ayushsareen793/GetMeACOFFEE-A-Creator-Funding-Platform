@@ -38,6 +38,9 @@ export const authoptions = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "github" || account.provider === "google") {
+        // some GitHub accounts have no public email then stop here instead of crashing
+        if (!user.email) return false
+
         await connectDB()
         const currentUser = await User.findOne({ email: user.email })
         if (!currentUser) {
@@ -48,9 +51,7 @@ export const authoptions = NextAuth({
             ? `${rawUsername}_${Date.now()}`
             : rawUsername
 
-          // Two different emails can share the same prefix
-          // (john@gmail.com vs john@yahoo.com) — make sure we don't
-          // collide with an existing username before creating.
+          // Two different emails can share the same prefix (john@gmail.com vs john@yahoo.com),  make sure we don't  collide with an existing username before creating. 
           const usernameTaken = await User.findOne({ username })
           if (usernameTaken) {
             username = `${rawUsername}_${Date.now()}`

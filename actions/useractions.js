@@ -21,6 +21,8 @@ export const fetchuser = async (username) => {
     await connectDB()
     let user = await User.findOne({ username: username }).lean()
     if (!user) return null
+    //browser ko secret nhi bhejna
+    delete user.razorpaysecret   
     user._id = user._id?.toString()
     user.createdAt = user.createdAt?.toISOString()
     user.updatedAt = user.updatedAt?.toISOString()
@@ -58,8 +60,6 @@ export const updateProfile = async (data, oldusername) => {
     }
     return { success: true }
 }
-
-
 
 // explaination in plain terms:
 

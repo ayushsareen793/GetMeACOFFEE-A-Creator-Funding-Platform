@@ -90,7 +90,7 @@ const PaymentPage = ({ username }) => {
       "description": "Test Transaction",
       "image": "https://example.com/your_logo",
       "order_id": orderID,
-      "callback_url": `${process.env.NEXT_PUBLIC_URL}/api/razorpay`,
+      "callback_url": `${window.location.origin}/api/razorpay`,
       "prefill": { "name": paymentform.name, "email": "", "contact": "" },
       "notes": { "address": "Razorpay Corporate Office" },
       "theme": { "color": "#3399cc" }
