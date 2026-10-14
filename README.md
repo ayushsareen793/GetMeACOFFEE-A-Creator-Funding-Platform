@@ -151,7 +151,7 @@ The landing page was audited with [PageSpeed Insights](https://pagespeed.web.dev
 | **Best Practices** | 100 | 100 |
 | **SEO** | 92 | 92 |
 
-![PageSpeed Insights mobile report: 97 Performance, 90 Accessibility, 100 Best Practices, 92 SEO](screenshots/coffee-lighthouse-mobile.png)
+![PageSpeed Insights mobile report: 97 Performance, 90 Accessibility, 100 Best Practices, 92 SEO](screenshots/getmeacoffee-lighthouse-mobile.png)
 
 [🔗 View the full PageSpeed Insights report](https://pagespeed.web.dev/analysis/https-get-me-acoffee-a-creator-funding-pl-vercel-app/5c18aapd8g?form_factor=mobile)
 
