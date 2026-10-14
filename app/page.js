@@ -129,7 +129,7 @@ export default function page() {
           {/* card 1 */}
           <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 text-center transition-all duration-200 hover:-translate-y-1 cursor-default -m-px">
             <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
-              <img src="man.gif" width={32} alt="" />
+              <img src="/man.webp" width={32} height={32} alt="" loading="lazy" decoding="async" />
             </div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Fund Yourself</h3>
             <p className="text-[13px] text-[#505068] leading-[1.65]">Your fans are always available to help you grow</p>
@@ -138,7 +138,7 @@ export default function page() {
           {/* card 2 */}
           <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 text-center transition-all duration-200 hover:-translate-y-1 cursor-default -m-px">
             <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
-              <img src="coin.gif" width={32} alt="" />
+              <img src="/coin.webp" width={32} height={32} alt="" loading="lazy" decoding="async" />
             </div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Earn Freely</h3>
             <p className="text-[13px] text-[#505068] leading-[1.65]">Receive direct contributions without limits</p>
@@ -147,7 +147,7 @@ export default function page() {
           {/* card 3 */}
           <div className="bg-black border-2 border-purple-600 hover:border-purple-500 hover:bg-[#0d0d18] p-8 text-center transition-all duration-200 hover:-translate-y-1 cursor-default -m-px">
             <div className="w-15 h-15 bg-purple-600/10 border-2 border-purple-600/25 flex items-center justify-center mx-auto mb-5 [clip-path:polygon(0_0,calc(100%-8px)_0,100%_8px,100%_100%,0_100%)]">
-              <img src="group.gif" width={32} alt="" />
+              <img src="/group.webp" width={32} height={32} alt="" loading="lazy" decoding="async" />
             </div>
             <h3 className="font-black text-[15px] text-[#e0e0f0] mb-2 tracking-[-0.01em]">Build Community</h3>
             <p className="text-[13px] text-[#505068] leading-[1.65]">Grow a loyal audience that supports you</p>

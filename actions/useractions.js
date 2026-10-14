@@ -58,7 +58,6 @@ export const updateProfile = async (data, oldusername) => {
         return { error: "Username cannot be empty" }
     }
     const newUsername = ndata.username.trim()
-
     const current = await User.findOne({ email })
     if (!current) {
         return { error: "Could not find your account to update — try logging out and back in." }
@@ -95,7 +94,6 @@ export const updateProfile = async (data, oldusername) => {
     if (current.username !== newUsername) {
         await Payment.updateMany({ to_user: current.username }, { $set: { to_user: newUsername } })
     }
-
     return { success: true }
 }
 

@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,19 +9,14 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
-  title: "Get Me A Coffee-Fund your projects with chai",
-  description: "This website is a crowdfunding platform for creators",
+  title: "GetMeACoffee | Fund Your Passion, One Coffee at a Time",
+  description: "A crowdfunding platform for creators. Get funded by your fans and followers and keep doing what you love.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col  bg-[#0c0c0e] text-white">
        <SessionWrapper>
         <Navbar />
