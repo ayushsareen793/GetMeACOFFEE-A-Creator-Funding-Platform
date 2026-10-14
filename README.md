@@ -29,6 +29,7 @@ Built entirely with the Next.js App Router, secured with NextAuth, powered by Ra
 - ✏️ **Editable Profiles** — Update name, username, bio, and images, with safe username-uniqueness checks on save
 - 🚀 **Indexed Queries** — Targeted MongoDB indexes and `.lean()` reads keep profile lookups and top-supporter queries efficient at scale (see [Performance Optimization](#-performance-optimization))
 - 🌑 **Custom Dark Purple UI** — A fully custom-designed dark theme (no component library), built with Tailwind CSS
+- 🚦 **Lighthouse-Optimized Landing Page** — Mobile Performance raised from 70 to 97, with 100 Best Practices (see [Lighthouse Optimization](#-lighthouse-optimization))
 - ⚡ **Deployed on Vercel** — Continuous deployment straight from the `master` branch via GitHub integration
 
 ---
@@ -64,6 +65,9 @@ Built entirely with the Next.js App Router, secured with NextAuth, powered by Ra
 | **Top supporters shown** | Top 10 highest payments per creator |
 | **User lookup speed-up** | 81% faster (27 ms → 5 ms) |
 | **Load-test dataset** | 5,000 seeded payment records |
+| **Lighthouse (mobile, landing page)** | 97 Performance · 90 Accessibility · 100 Best Practices · 92 SEO |
+| **Lighthouse Performance gain** | 70 → 97 on mobile |
+| **Homepage icon payload** | ~2.9 MB of GIFs → ~195 KB of animated WebP |
 
 
 ---
@@ -134,6 +138,44 @@ These include full Next.js server-side rendering, not just database time.
 
 ---
 
+## 🚦 Lighthouse Optimization
+
+The landing page was audited with [PageSpeed Insights](https://pagespeed.web.dev/) (mobile) on the live Vercel deployment. Mobile Performance went from 70 to 97.
+
+**Test setup:** PageSpeed Insights, mobile, live URL (`get-me-acoffee-a-creator-funding-pl.vercel.app`), tested on 2026-10-14.
+
+| Category | Before | After |
+|---|---|---|
+| **Performance** | 70 | **97** |
+| **Accessibility** | 90 | 90 |
+| **Best Practices** | 100 | 100 |
+| **SEO** | 92 | 92 |
+
+![PageSpeed Insights mobile report: 97 Performance, 90 Accessibility, 100 Best Practices, 92 SEO](screenshots/coffee-lighthouse-mobile.png)
+
+[🔗 View the full PageSpeed Insights report](https://pagespeed.web.dev/analysis/https-get-me-acoffee-a-creator-funding-pl-vercel-app/5c18aapd8g?form_factor=mobile)
+
+### What the audit found
+
+- The Largest Contentful Paint element was the hero heading, with a **2,310 ms element render delay** even though time to first byte was 0 ms, so the server and database were not the problem.
+- PageSpeed estimated **2,837 KiB of image savings**. The homepage "How it works" cards used three 400×400 animated GIFs (`man.gif`, `coin.gif`, `group.gif`, roughly 0.9–1 MB each) that are displayed at only 32 px wide, and the browser started downloading all of them immediately.
+
+### What changed
+
+| File | Change |
+|---|---|
+| `public/man.webp`, `coin.webp`, `group.webp` | The three GIFs re-encoded as 64×64 animated WebP (about 195 KB in total instead of about 2.9 MB); they still animate and stay sharp at the 32 px display size |
+| `app/page.js` | The three card icons now use the WebP files with explicit `width` and `height` and `loading="lazy"`, so they download only when scrolled near |
+| `app/layout.js` | Improved the page title and description; removed an unused font |
+
+### Key takeaways
+
+- **Right-sizing animated images** was the biggest win: a 32 px icon does not need a 400 px, 1 MB GIF.
+- **Lazy loading** keeps below-the-fold assets from competing with the heading, CSS, and fonts during the first paint.
+- Accessibility (90) and SEO (92) already passed and were not changed. Lighthouse scores vary slightly between runs, and these results are lab estimates for the landing page only; the other pages have not been audited yet.
+
+---
+
 ## 📂 Project Structure
 
 ```
@@ -163,7 +205,7 @@ GetMeACOFFEE-A-Creator-Funding-Platform/
 │   └── Payment.js              # Payment schema (order id, amount, message, status) + 3 compound indexes
 ├── scripts/
 │   └── applyIndexes.js         # Applies the MongoDB indexes
-├── screenshots/                # Before/after query-plan and timing screenshots
+├── screenshots/                # Before/after query-plan, timing, and Lighthouse screenshots
 └── public/                     # Static assets (logo, GIFs, icons)
 ```
 
@@ -280,6 +322,7 @@ To deploy your own copy, import the repo into Vercel and add the same environmen
 
 ## 🗺️ Roadmap
 
+- [x] Lighthouse optimization of the landing page (mobile Performance 70 → 97)
 - [ ] Per-creator custom Razorpay payout keys (fields already exist in the schema)
 - [ ] Email notifications on new support
 - [ ] Public supporter leaderboard page
